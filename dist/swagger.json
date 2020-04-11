@@ -1,0 +1,1142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "Beta",
+    "title": "Hara Depo API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "hara-depo-zbpsagleya-an.a.run.app",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "Hara Depo",
+      "description": "API Hara Depo",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/otlet/addbarang": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "registrasi otlet owner",
+        "description": "",
+        "operationId": "registrasi",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NamaBarang",
+            "in": "formData",
+            "description": "Nama Barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "HargaJual",
+            "in": "formData",
+            "description": "Harga Jual ke konsumen",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "HargaBeli",
+            "in": "formData",
+            "description": "Harga Beli dari Suplier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "StokAwal",
+            "in": "formData",
+            "description": "Jumlah stok awal pada saat pertama kali input",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "StokAlarm",
+            "in": "formData",
+            "description": "Jumlah stok untuk alert",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "Deskripsi",
+            "in": "formData",
+            "description": "deskripsi barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "IdKategori",
+            "in": "formData",
+            "description": "id kategory barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "PhotoBarang",
+            "in": "formData",
+            "description": "Photo barang yang akan ditambahkan",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Barang"
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/addkategori": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Menambahkan kategori baru",
+        "description": "",
+        "operationId": "/otlet/addkategori",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Menambahkan kategori baru",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kategory"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AddKategory"
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/otlet/baranginfo":{
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mendapatkan informasi barang",
+        "description": "",
+        "operationId": "/otlet/baranginfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idbarang",
+            "description": "idbarang yang didapatkan",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "KodeUser": {
+                  "type": "string",
+                  "example": "w1Lq"
+                },
+                "IdBarang": {
+                  "type": "string",
+                  "example": "IMhIG"
+                },
+                "NamaBarang": {
+                  "type": "string",
+                  "example": "PUPUK H5 Ks"
+                },
+                "NamaKategory": {
+                  "type": "string",
+                  "example": "uxxx"
+                },
+                "HargaJual": {
+                  "type": "integer",
+                  "example": 25000
+                },
+                "StokAkhir": {
+                  "type": "integer",
+                  "example": 20
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No item",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "No item"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/listbarang": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mengambil list barang",
+        "description": "",
+        "operationId": "/otlet/listbarang",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Halaman. nilai 0 untuk 1 - 10. 1 untuk 11 - 20. dst",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "sort by hargajual,terbaru, atau stok. default by abjad nama barang",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ListBarang"
+              }
+            }
+          },
+          "204": {
+            "description": "No items"
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/listkategori": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mengambil list kategory",
+        "description": "",
+        "operationId": "/otlet/listkategori",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Halaman. nilai 0 untuk 1 - 10. 1 untuk 11 - 20. dst",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ListKategory"
+              }
+            }
+          },
+          "204": {
+            "description": "No items"
+          }
+        },
+        "security": []
+      }
+    },
+    "otlet/listpersediaan": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mengambil list persediaan",
+        "description": "",
+        "operationId": "/otlet/listpersediaan",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Halaman. nilai 0 untuk 1 - 10. 1 untuk 11 - 20. dst",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Persediaan"
+              }
+            }
+          },
+          "204": {
+            "description": "No items"
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/otp": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mengirimkan otp",
+        "description": "",
+        "operationId": "/otlet/otp",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Otp Nomor Handhone",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Hp"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ResponOtp"
+            }
+          },
+          "409": {
+            "description": "User Registered",
+            "schema": {
+              "$ref": "#/definitions/ResponOtp"
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/otpconfirm": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mengkonfirmasi OTP",
+        "description": "",
+        "operationId": "/otlet/otp",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Konfirmasi otp",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Otp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "value akan diisi dengan register atau popup",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "register"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "value akan diisi dengan home",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "home"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/registrasi": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "registrasi otlet owner",
+        "description": "",
+        "operationId": "registrasi",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NamaLengkap",
+            "in": "formData",
+            "description": "Nama Lengkap Otlet Owner",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "NomorKtp",
+            "in": "formData",
+            "description": "Nomor KTP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "TanggalLahir",
+            "in": "formData",
+            "description": "Tanggal Lahir Otlet Owner",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "JenisKelamin",
+            "in": "formData",
+            "description": "Jenis Kelamin Otlet Owner",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "FotoKtp",
+            "in": "formData",
+            "description": "Foto KTP Otlet Owner",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "SelfieKtp",
+            "in": "formData",
+            "description": "Foto Selfie Pakai KTP",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "FotoKontrak",
+            "in": "formData",
+            "description": "Foto Tanda Kontrak otlet owner dengan PIHAK HARA DEPO",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "Email",
+            "in": "formData",
+            "description": "Email Aktif Otlet Owner",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "NamaToko",
+            "in": "formData",
+            "description": "Nama Toko yang didaftar Otlet Owner",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "FotoToko",
+            "in": "formData",
+            "description": "Foto Toko Otlet Owner",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "AlamatToko",
+            "in": "formData",
+            "description": "Alamat Toko Otlet Owner",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "KodeReferensi",
+            "in": "formData",
+            "description": "Kode Referensi Otlet Owner yang didapat",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Hp",
+            "in": "formData",
+            "description": "Nomor Handphone Otlet Owner",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RegisterUser"
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/updatebarang": {
+      "put": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "update field barang",
+        "description": "untuk mengupdate silahkan diisi yang mau diupdate. untuk yang tidak diupdate silahkan dikosongkan saja",
+        "operationId": "registrasi",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NamaBarang",
+            "in": "formData",
+            "description": "Nama Barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "HargaJual",
+            "in": "formData",
+            "description": "Harga Jual ke konsumen",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "HargaBeli",
+            "in": "formData",
+            "description": "Harga Beli dari Suplier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "StokAwal",
+            "in": "formData",
+            "description": "Jumlah stok awal pada saat pertama kali input",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "StokAlarm",
+            "in": "formData",
+            "description": "Jumlah stok untuk alert",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "Deskripsi",
+            "in": "formData",
+            "description": "deskripsi barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "IdKategori",
+            "in": "formData",
+            "description": "id kategory barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "IdBarang",
+            "in": "formData",
+            "description": "ID barang yang akan diupdate",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Barang"
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/updatekategory": {
+      "put": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "update field barang",
+        "description": "untuk mengupdate silahkan diisi yang mau diupdate. untuk yang tidak diupdate silahkan dikosongkan saja",
+        "operationId": "registrasi",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "KodeKategory",
+            "in": "formData",
+            "description": "Kode Kategory Barang",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NamaKategory",
+            "in": "formData",
+            "description": "Nama kategory Barang",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Kategory"
+            }
+          }
+        },
+        "security": []
+      }
+
+    },
+    "/otlet/deletebarang": {
+      "delete": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mendapatkan informasi barang",
+        "description": "",
+        "operationId": "/otlet/baranginfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idbarang",
+            "description": "id barang yang akan dihapus",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/deletekategory": {
+      "delete": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mendapatkan informasi barang",
+        "description": "",
+        "operationId": "/otlet/baranginfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "kodekategory",
+            "description": "kode kategory",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Barang": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+          "KodeUser":{
+            "type": "string",
+            "example": "SC6t"
+          },
+          "NamaBarang":{
+            "type": "string",
+            "example": "Pupuk Urea H5N1"
+          },
+          "Kategori":{
+            "type": "string",
+            "example": "Basah"
+          },
+          "Barcode":{
+            "type": "string",
+            "example": "XXXX-XXXXX-XXXX-XXX"
+          },
+          "HargaJual": {
+            "type": "number",
+            "example": 25000.00
+          },
+          "HargaBeli":{
+            "type": "number",
+            "example": 25000.00
+          },
+          "StokAwal":{
+            "type": "integer",
+            "example": 15
+          },
+          "StokAlarm":{
+            "type": "integer",
+            "example": 5
+          },
+          "Deskripsi":{
+            "type": "string",
+            "example": "Penjelasan tetntang barang"
+          },
+          "IdKategori": {
+           "type": "integer",
+            "example": 5
+          },
+          "PhotoBarang": {
+            "type": "string",
+            "example": "https://storage.googleapis.com/hara-depo/TDnX/barang/KS23S/alham2.PNG"
+          }
+        },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "Hp": {
+      "type": "object",
+      "required": [
+        "Hp"
+      ],
+      "properties": {
+        "Hp":{
+          "type": "string",
+          "example": "+62821234xxxxx"
+        }
+      }
+    },
+    "Otp": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+        "KodeUser": {
+          "type": "string",
+          "example": "SC6t"
+        },
+        "KodeOtp": {
+          "type": "string",
+          "example": "7X2xb0"
+        },
+        "Hp": {
+          "type": "string",
+          "example": "0808787878"
+        }
+      }
+    },
+    "ResponOtp":{
+      "type": "object",
+      "required":["KodeUser"],
+      "properties": {
+        "KodeUser": {
+          "type": "string",
+          "example": "SC6t"
+        }
+      }
+    },
+    "Kategory": {
+      "type": "object",
+      "required": [
+        "NamaKategory"
+      ],
+      "properties": {
+        "NamaKategory": {
+          "type": "string",
+          "example": "SC6t"
+        },
+        "KodeUser": {
+          "type": "string",
+          "example": "SC6t"
+        }
+      }
+    },
+    "AddKategory": {
+      "type": "object",
+      "required": [
+        "NamaKategory"
+      ],
+      "properties": {
+        "KodeKategory":{
+          "type": "integer",
+          "example": 5
+        },
+        "IDBarang": {
+          "type": "string",
+          "example": ""
+        },
+        "KodeUser":{
+          "type": "string",
+          "example": "Sc6t"
+        },
+        "NamaKategory":{
+          "type": "string",
+          "example": "asoi"
+        }
+      }
+    },
+    "ListBarang": {
+      "type": "object",
+      "required": [
+        "NamaKategory"
+      ],
+      "properties": {
+        "KodeUser": {
+          "type": "string",
+          "example": "SC6t"
+        },
+        "IdBarang":{
+          "type": "string",
+          "example":"IMhIG"
+        },
+        "NamaBarang":{
+          "type": "string",
+          "example": "PUPUK H5 Ks"
+        },
+        "HargaJual":{
+          "type": "integer",
+          "example": 25000
+        },
+        "Jumlah": {
+          "type": "integer",
+          "example": 20
+        }
+      }
+    },
+    "Persediaan": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+        "KodeUser":{
+          "type": "string",
+          "example": "SC6t"
+        },
+        "IdBarang":{
+          "type": "string",
+          "example": "5aKZ1"
+        },
+        "NamaBarang":{
+          "type": "string",
+          "example": "PUPUK H5 K"
+        },
+        "NamaKategory":{
+          "type": "string",
+          "example": "uxxx"
+        },
+        "Penjualan":{
+          "type": "integer",
+          "example": 15
+        },
+        "StokAkhir":{
+          "type": "integer",
+          "example": 5
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "ListKategory": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+        "KodeUser":{
+          "type": "string",
+          "example": "SC6t"
+        },
+        "NamaKategory":{
+          "type": "string",
+          "example": "uxxx"
+        },
+        "Jumlah":{
+          "type": "integer",
+          "example": 5
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "RegisterUser": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+        "KodeUser":{
+          "type": "string",
+          "example": "SC6t"
+        },
+        "NamaLengkap":{
+          "type": "string",
+          "example": "Abdul Haris Djafar"
+        },
+        "NomorKtp":{
+          "type": "string",
+          "example": "090898xxxxxx"
+        },
+        "TanggalLahir": {
+          "type": "string",
+          "example": "02/07/1993"
+        },
+        "JenisKelamin":{
+          "type": "string",
+          "example": "Laki Laki"
+        },
+        "FotoKtp":{
+          "type": "string",
+          "example": "https://storage.googleapis.com/hara-depo/TDnX/user/Toko/danang2.PNG"
+        },
+        "SelfieKtp":{
+          "type": "string",
+          "example": "https://storage.googleapis.com/hara-depo/TDnX/user/Toko/danang2.PNG"
+        },
+        "FotoKontrak":{
+          "type": "string",
+          "example": "https://storage.googleapis.com/hara-depo/TDnX/user/Toko/danang2.PNG"
+        },
+        "Email":{
+          "type": "string",
+          "example": "uhuy@gmail.com"
+        },
+        "NamaToko":{
+          "type": "string",
+          "example": "Kotekman Cell Center"
+        },
+        "AlamatToko": {
+          "type": "string",
+          "example": "jl. Haji Taha"
+        },
+        "KodeReferensi":{
+          "type": "string",
+          "example": "xxxxx-xxxxx-xxxxx"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
