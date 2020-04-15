@@ -3,14 +3,14 @@ package barang
 import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 )
 
 func DeleteBarangOtletOwner(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	barang := model.BarangOtlet{}
-	response := model.ResponseUniversal{}
+	barang := mobile.BarangOtlet{}
+	response := mobile.ResponseUniversal{}
 	vars := mux.Vars(r)
 	kodeuser := vars["kodeuser"]
 	idbarang := vars["idbarang"]

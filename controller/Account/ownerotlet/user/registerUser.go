@@ -3,15 +3,15 @@ package user
 import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"io/ioutil"
 	"net/http"
 )
 
 func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	user := model.UserOtlet{}
-	toko := model.Toko{}
+	user := mobile.UserOtlet{}
+	toko := mobile.Toko{}
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {

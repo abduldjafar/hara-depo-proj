@@ -1,4 +1,4 @@
-package model
+package mobile
 
 import "github.com/jinzhu/gorm"
 

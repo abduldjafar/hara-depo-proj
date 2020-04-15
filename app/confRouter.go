@@ -13,7 +13,7 @@ func (app *App) setRouters() {
 	app.Post("/v1/otlet/addkategori", app.AddKategori)
 	app.Post("/v1/otlet/pembelianbarang", app.PembelianBarang)
 	app.DeleteBarang("/v1/otlet/deletebarang", app.DeleteBarangI)
-	app.DeleteKategory("/v1/otlet/deletekategory", app.DeleteKategoryI)
+	app.DeleteKategory("/v1/otlet/deletekategori", app.DeleteKategoryI)
 	app.UpdateBarang("/v1/otlet/updatebarang", app.UpdateBarangI)
-	app.UpdateBarang("/v1/otlet/updatekategory", app.UpdateKategoryI)
+	app.UpdateBarang("/v1/otlet/updatekategori", app.UpdateKategoryI)
 }

@@ -683,6 +683,13 @@
             "description": "ID barang yang akan diupdate",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "PhotoBarang",
+            "in": "formData",
+            "description": "Foto Barang",
+            "required": false,
+            "type": "file"
           }
         ],
         "responses": {

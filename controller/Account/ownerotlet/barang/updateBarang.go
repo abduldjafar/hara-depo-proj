@@ -3,8 +3,9 @@ package barang
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -16,9 +17,11 @@ type response struct {
 
 func UpdateBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
-	stok := model.Stok{}
-	stokquery := model.Stok{}
-	barang := model.BarangOtlet{}
+	stok := mobile.Stok{}
+	stokquery := mobile.Stok{}
+	barang := mobile.BarangOtlet{}
+	barangResponse := mobile.BarangOtlet{}
+	//stokResponse := model.Stok{}
 	response := response{}
 
 	datasBarang := map[string]interface{}{}
@@ -55,8 +58,7 @@ func UpdateBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	_, _, err := r.FormFile("PhotoBarang")
 	if err != nil {
-		fmt.Println(err.Error())
-		panic(err)
+		log.Println(err.Error())
 	} else {
 		datasBarang["PhotoBarang"] = util.UploadPhoto(r, "PhotoBarang", r.FormValue("KodeUser"), "barang", idbarang)
 	}
@@ -79,8 +81,15 @@ func UpdateBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.Barang = datasBarang
-	response.Stok = datasStok
+	if err := db.Where("kode_user=? AND id_barang=?", r.FormValue("KodeUser"), r.FormValue("IdBarang")).
+		Find(&barangResponse).Error; err != nil {
+		fmt.Println("ahay")
+		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		return
+
+	}
+	response.Barang = barangResponse
+	response.Stok = stok
 
 	util.RespondJSON(w, 200, response)
 }

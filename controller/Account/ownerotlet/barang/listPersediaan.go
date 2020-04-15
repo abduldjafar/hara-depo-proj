@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 	"strconv"
 )
 
 func ListPersediaanOtletOwner(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	barangs := []model.KategoryJStockBrng{}
+	barangs := []mobile.KategoryJStockBrng{}
 	vars := mux.Vars(r)
 	page, _ := strconv.Atoi(vars["page"])
 	userk := vars["kodeuser"]

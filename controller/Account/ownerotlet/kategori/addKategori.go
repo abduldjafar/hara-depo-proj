@@ -3,7 +3,7 @@ package kategori
 import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
 	"hara-depo-proj/util"
 	"io/ioutil"
@@ -12,8 +12,9 @@ import (
 
 func AddKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
-	kategory := model.Kategory{}
-	stok := model.Stok{}
+	kategory := mobile.Kategory{}
+	kategoryUndifined := mobile.Kategory{}
+	stok := mobile.Stok{}
 
 	body, err1 := ioutil.ReadAll(r.Body)
 
@@ -23,6 +24,15 @@ func AddKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	_ = err1
 
 	defer r.Body.Close()
+
+	kategoryUndifined.KodeKategory = 0
+	kategoryUndifined.KodeUser = kategory.KodeUser
+	kategoryUndifined.NamaKategory = "Undifined"
+
+	if err := db.Save(&kategoryUndifined).Error; err != nil {
+		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
 	if err := db.Save(&kategory).Error; err != nil {
 		util.RespondError(w, http.StatusInternalServerError, err.Error())
@@ -40,5 +50,3 @@ func AddKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	util.RespondJSON(w, http.StatusOK, kategory)
 
 }
-
-// output add kategori kategory + id

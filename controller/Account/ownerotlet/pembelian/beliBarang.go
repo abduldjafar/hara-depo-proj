@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"io/ioutil"
 	"net/http"
 )
 
-func getbarang(db *gorm.DB, idbarang string, barang model.BarangOtlet) model.BarangOtlet {
+func getbarang(db *gorm.DB, idbarang string, barang mobile.BarangOtlet) mobile.BarangOtlet {
 	if err := db.Where("barang_otlet.id_barang = ?", idbarang).Find(&barang).Error; err != nil {
 		return barang
 	}
@@ -18,12 +18,12 @@ func getbarang(db *gorm.DB, idbarang string, barang model.BarangOtlet) model.Bar
 }
 
 func BeliBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	beli := []model.RequestPembelian{}
-	rincian := model.RincianBelanja{}
-	listBelanja := []model.Rincianbelanja{}
-	belanja := model.Rincianbelanja{}
-	barang := model.BarangOtlet{}
-	barangTemp := model.BarangOtlet{}
+	beli := []mobile.RequestPembelian{}
+	rincian := mobile.RincianBelanja{}
+	listBelanja := []mobile.Rincianbelanja{}
+	belanja := mobile.Rincianbelanja{}
+	barang := mobile.BarangOtlet{}
+	barangTemp := mobile.BarangOtlet{}
 	listharga := []float32{}
 
 	body, err1 := ioutil.ReadAll(r.Body)

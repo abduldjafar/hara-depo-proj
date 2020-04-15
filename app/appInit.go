@@ -4,7 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/config"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"log"
 	"net/http"
 )
@@ -21,14 +21,14 @@ func (app *App) Initialize() {
 		log.Fatal(err)
 	}
 
-	app.TbUserHara = model.DBMigrationAccount(db, &model.Userhara{})
-	app.TbBarang = model.DBMigrationAccount(db, &model.BarangOtlet{})
-	app.TbUserOtlet = model.DBMigrationAccount(db, model.UserOtlet{})
-	app.TbTokoOtlet = model.DBMigrationAccount(db, model.Toko{})
-	app.TbKategori = model.DBMigrationAccount(db, model.Kategory{})
-	app.TbStok = model.DBMigrationAccount(db, model.Stok{})
-	app.TbPelanggan = model.DBMigrationAccount(db, model.Pelanggan{})
-	app.TbSuplier = model.DBMigrationAccount(db, model.Suplier{})
+	app.TbUserHara = mobile.DBMigrationAccount(db, &mobile.Userhara{})
+	app.TbBarang = mobile.DBMigrationAccount(db, &mobile.BarangOtlet{})
+	app.TbUserOtlet = mobile.DBMigrationAccount(db, mobile.UserOtlet{})
+	app.TbTokoOtlet = mobile.DBMigrationAccount(db, mobile.Toko{})
+	app.TbKategori = mobile.DBMigrationAccount(db, mobile.Kategory{})
+	app.TbStok = mobile.DBMigrationAccount(db, mobile.Stok{})
+	app.TbPelanggan = mobile.DBMigrationAccount(db, mobile.Pelanggan{})
+	app.TbSuplier = mobile.DBMigrationAccount(db, mobile.Suplier{})
 	app.Router = mux.NewRouter()
 	//a.SubRouter = a.Router.PathPrefix("/auth").Subrouter()
 	//a.SubRouter.Use(auth.JwtVerify)

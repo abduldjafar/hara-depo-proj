@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	user3 "hara-depo-proj/controller/Account/ownerotlet/user"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
 	"hara-depo-proj/redis"
 	"hara-depo-proj/util"
@@ -14,8 +14,8 @@ import (
 )
 
 func OtpUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	user := model.UserOtlet{}
-	user2 := model.UserOtlet{}
+	user := mobile.UserOtlet{}
+	user2 := mobile.UserOtlet{}
 
 	body, err1 := ioutil.ReadAll(r.Body)
 

@@ -3,7 +3,7 @@ package suplier
 import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"io/ioutil"
 	"net/http"
@@ -11,7 +11,7 @@ import (
 
 func AddSuplier(db1 *gorm.DB, db2 *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
-	suplier := model.Suplier{}
+	suplier := mobile.Suplier{}
 
 	body, err1 := ioutil.ReadAll(r.Body)
 

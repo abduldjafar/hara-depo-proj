@@ -2,7 +2,7 @@ package kategori
 
 import (
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 	"strconv"
@@ -10,7 +10,7 @@ import (
 
 func UpdateKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
-	kategory := model.Kategory{}
+	kategory := mobile.Kategory{}
 	dataskategory := map[string]interface{}{}
 
 	listKategory := []string{"KodeUser", "KodeKategory", "NamaKategory"}

@@ -2,7 +2,7 @@ package barang
 
 import (
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
 	"hara-depo-proj/util"
 	"net/http"
@@ -11,9 +11,9 @@ import (
 
 func AddBarang(db1 *gorm.DB, db2 *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
-	stok := model.Stok{}
-	barang := model.BarangOtlet{}
-	respon := model.ResponAddBarang{}
+	stok := mobile.Stok{}
+	barang := mobile.BarangOtlet{}
+	respon := mobile.ResponAddBarang{}
 
 	KodeUser := r.FormValue("KodeUser")
 	NamaBarang := r.FormValue("NamaBarang")

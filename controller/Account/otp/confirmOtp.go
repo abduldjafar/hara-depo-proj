@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	user3 "hara-depo-proj/controller/Account/ownerotlet/user"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/redis"
 	"hara-depo-proj/util"
 	"io/ioutil"
@@ -13,15 +13,15 @@ import (
 	"strconv"
 )
 
-func cleanRedis(user model.OtpCode) {
+func cleanRedis(user mobile.OtpCode) {
 	redis.DeleteDataFromRedis(user.KodeUser + "-register")
 	redis.DeleteDataFromRedis(user.KodeUser + "-register-login-count")
 }
 
 func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
-	user := model.OtpCode{}
-	userOtlet := model.UserOtlet{}
+	user := mobile.OtpCode{}
+	userOtlet := mobile.UserOtlet{}
 
 	body, err1 := ioutil.ReadAll(r.Body)
 
@@ -43,7 +43,7 @@ func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	if values == user.KodeOtp {
 		err := user3.FindUserStatus(db, user.Hp, "Enabled")
 		if err != nil {
-			response := model.ResponseOtpNull{}
+			response := mobile.ResponseOtpNull{}
 			err2 := user3.FindUserStatus(db, user.Hp, "Disabled")
 			if err2 != nil {
 				if err := db.Save(&userOtlet).Error; err != nil {
@@ -56,9 +56,9 @@ func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 				response.TokoUser = nil
 				util.RespondJSON(w, 200, response)
 			} else {
-				userOtlet := model.UserOtlet{}
-				toko := model.Toko{}
-				response := model.ResponseOtp{}
+				userOtlet := mobile.UserOtlet{}
+				toko := mobile.Toko{}
+				response := mobile.ResponseOtp{}
 
 				if err := db.Where("user_otlet.kode_user=? AND user_otlet.hp=?", user.KodeUser, user.Hp).Find(&userOtlet).Error; err != nil {
 					util.RespondError(w, http.StatusInternalServerError, err.Error())
@@ -76,9 +76,9 @@ func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			}
 		} else {
 			cleanRedis(user)
-			userOtlet := model.UserOtlet{}
-			toko := model.Toko{}
-			response := model.ResponseOtp{}
+			userOtlet := mobile.UserOtlet{}
+			toko := mobile.Toko{}
+			response := mobile.ResponseOtp{}
 
 			if err := db.Where("user_otlet.kode_user=? AND user_otlet.hp=?", user.KodeUser, user.Hp).Find(&userOtlet).Error; err != nil {
 				util.RespondError(w, http.StatusInternalServerError, err.Error())

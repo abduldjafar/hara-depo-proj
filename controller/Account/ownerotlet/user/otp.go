@@ -3,13 +3,13 @@ package user
 import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 )
 
 func OtpUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	user := model.Userhara{}
+	user := mobile.Userhara{}
 
 	decoder := json.NewDecoder(r.Body)
 

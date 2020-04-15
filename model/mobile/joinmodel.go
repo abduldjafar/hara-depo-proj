@@ -1,4 +1,4 @@
-package model
+package mobile
 
 type BarangJoinStok struct {
 	KodeUser     string
@@ -23,4 +23,15 @@ type KategoryJStockBrng struct {
 	NamaKategory string
 	Penjualan    int
 	StokAkhir    int
+}
+
+type BarangId struct {
+	IdBarang int
+}
+type KategoriJoinStokBr struct {
+	KodeKategory int
+	NamaKategory string
+	KodeUser     string
+	Jumlah       int
+	Barang       []BarangId
 }

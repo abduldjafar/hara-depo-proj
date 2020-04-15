@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 )
 
 func GetBarangInfo(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	barangs := model.BarangJoinStok{}
+	barangs := mobile.BarangJoinStok{}
 	vars := mux.Vars(r)
 	idbarang := vars["idbarang"]
 	fmt.Println(idbarang)

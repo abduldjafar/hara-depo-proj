@@ -1,4 +1,4 @@
-package model
+package mobile
 
 import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -115,6 +115,22 @@ type Suplier struct {
 	TimeCreated time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
+type Transaksi struct {
+	IdTransaksi    string
+	IdBarang       int
+	IdSuplier      int
+	IdPelanggan    int
+	IdPajak        int
+	IdDiskon       int
+	IdHutang       int
+	KodeStruk      string
+	JenisTransaksi string
+	TipeTransaksi  string
+	Qty            int
+	Total          int
+	Pembulatan     int
+	CreateDate     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+}
 type RincianBelanja struct {
 	Rincian           []Rincianbelanja
 	TotalPembelanjaan float32

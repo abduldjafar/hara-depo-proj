@@ -2,14 +2,14 @@ package user
 
 import (
 	"github.com/jinzhu/gorm"
-	"hara-depo-proj/model"
+	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 	"sync"
 )
 
 func RegisterUserV2(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	var State = &model.State{&sync.Mutex{}, map[string]string{}}
+	var State = &mobile.State{&sync.Mutex{}, map[string]string{}}
 
 	State.Lock()
 	defer State.Unlock()
@@ -25,9 +25,9 @@ func RegisterUserV2(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	KodeReferensi := r.FormValue("KodeReferensi")
 	Hp := r.FormValue("Hp")
 
-	user := model.UserOtlet{}
-	toko := model.Toko{}
-	response := model.ResponseRegister{}
+	user := mobile.UserOtlet{}
+	toko := mobile.Toko{}
+	response := mobile.ResponseRegister{}
 
 	user.KodeUser = KodeUser
 	user.NamaLengkap = NamaLengkap
