@@ -13,6 +13,7 @@ type Configuration struct {
 	Zensiva  zensiva
 	Redis    redis
 	Gcp      gcp
+	Aws aws
 }
 
 type postgres struct {
@@ -48,6 +49,11 @@ type gcp struct {
 	Bucket    string
 	Projectid string
 	Filename  string
+}
+
+type aws struct {
+	Region string
+	Bucketname string
 }
 
 func GetConfig(baseConfig *Configuration) {

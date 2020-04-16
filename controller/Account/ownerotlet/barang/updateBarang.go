@@ -58,7 +58,7 @@ func UpdateBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err.Error())
 		panic(err)
 	} else {
-		datasBarang["PhotoBarang"] = util.UploadPhoto(r, "PhotoBarang", r.FormValue("KodeUser"), "barang", idbarang)
+		datasBarang["PhotoBarang"] = util.UploadPhotoAws(r, "PhotoBarang", r.FormValue("KodeUser"), "barang", idbarang)
 	}
 
 	if err := db.Model(&barang).Updates(datasBarang).Error; err != nil {

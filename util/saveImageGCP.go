@@ -12,7 +12,7 @@ import (
 	"os"
 )
 
-func getFiles(r *http.Request, key string) string {
+func GetFiles(r *http.Request, key string) string {
 	file, handler, err := r.FormFile(key)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -30,7 +30,7 @@ func getFiles(r *http.Request, key string) string {
 
 }
 func UploadPhoto(r *http.Request, file, kodeuser, jenis, path string) string {
-	fto := getFiles(r, file)
+	fto := GetFiles(r, file)
 	url := UploadFileGCP(fto, kodeuser+"/"+jenis+"/"+path+"/"+fto)
 	var err = os.Remove(fto)
 	if err != nil {

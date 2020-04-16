@@ -28,7 +28,7 @@ func SaveData(key string, value string) {
 func GetData(key string) error {
 	err := redisConn().Get(key).Err()
 	if err != nil {
-		fmt.Println("err")
+		fmt.Println(err.Error())
 	}
 	return err
 }

@@ -53,7 +53,7 @@ func AddBarang(db1 *gorm.DB, db2 *gorm.DB, w http.ResponseWriter, r *http.Reques
 
 	stok.IDBarang = barang.IdBarang
 	idbarang := strconv.Itoa(barang.IdBarang)
-	barang.PhotoBarang = util.UploadPhoto(r, "PhotoBarang", barang.KodeUser, "barang", idbarang)
+	barang.PhotoBarang = util.UploadPhotoAws(r, "PhotoBarang", barang.KodeUser, "barang", idbarang)
 
 	if err := db1.Where("id_barang=?", idbarang).Save(&barang).Error; err != nil {
 		util.RespondError(w, http.StatusInternalServerError, err.Error())
