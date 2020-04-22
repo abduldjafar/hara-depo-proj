@@ -11,14 +11,7 @@ db="postgres"
 user="postgres"
 password="postgres"
 
-[twillio]
-authToken="e8845a74ed47bc4d0f2c9d2c29761a63"
-accountSid="ACb483b1cc20ace5bc8fd928f55504c063"
-from="+17049355653"
 
-[zensiva]
-Userkey="u7znc3"
-Passkey="KFTwxB4hrVm3tM5R"
 
 [redis]
 host="localhost"
