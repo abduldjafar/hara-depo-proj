@@ -29,9 +29,10 @@ func (app *App) Initialize() {
 	app.TbStok = mobile.DBMigrationAccount(db, mobile.Stok{})
 	app.TbPelanggan = mobile.DBMigrationAccount(db, mobile.Pelanggan{})
 	app.TbSuplier = mobile.DBMigrationAccount(db, mobile.Suplier{})
+	app.TbTransaksiBarang = mobile.DBMigrationAccount(db, mobile.TransaksiBarang{})
+	app.TbTransaksiUang = mobile.DBMigrationAccount(db, mobile.TransaksiUang{})
 	app.Router = mux.NewRouter()
-	//a.SubRouter = a.Router.PathPrefix("/auth").Subrouter()
-	//a.SubRouter.Use(auth.JwtVerify)
+
 	app.setRouters()
 	sh := http.StripPrefix("/swaggerui/", http.FileServer(http.Dir("./dist/")))
 	app.Router.PathPrefix("/swaggerui/").Handler(sh)

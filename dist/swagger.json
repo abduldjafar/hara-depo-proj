@@ -25,7 +25,7 @@
       }
     }
   ],
-  "schemes":
+  "schemes":[
     "http"
   ],
   "paths": {
@@ -157,7 +157,7 @@
         "security": []
       }
     },
-    "/v1/otlet/baranginfo":{
+    "/otlet/baranginfo": {
       "get": {
         "tags": [
           "otlet"
@@ -190,7 +190,6 @@
               "type": "string"
             }
           }
-
         ],
         "responses": {
           "200": {
@@ -324,7 +323,8 @@
             "schema": {
               "type": "integer"
             }
-          },{
+          },
+          {
             "in": "query",
             "name": "kodeuser",
             "description": "kode user otlet owner",
@@ -351,7 +351,7 @@
         "security": []
       }
     },
-    "otlet/listpersediaan": {
+    "/otlet/listpersediaan": {
       "get": {
         "tags": [
           "otlet"
@@ -751,7 +751,6 @@
         },
         "security": []
       }
-
     },
     "/otlet/deletebarang": {
       "delete": {
@@ -786,7 +785,6 @@
               "type": "string"
             }
           }
-
         ],
         "responses": {
           "200": {
@@ -832,7 +830,6 @@
               "type": "string"
             }
           }
-
         ],
         "responses": {
           "200": {
@@ -843,6 +840,188 @@
           }
         },
         "security": []
+      }
+    },
+    "/otlet/addsuplier": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "registrasi otlet suplier",
+        "description": "",
+        "operationId": "registrasi",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NamaSuplier",
+            "in": "formData",
+            "description": "Nama Suplier yang didaftarkan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Hp",
+            "in": "formData",
+            "description": "No Handphone Suplier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Email",
+            "in": "formData",
+            "description": "Email Suplier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Alamat",
+            "in": "formData",
+            "description": "Alamat Suplier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "IdSuplier": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "KodeUser": {
+                  "type": "string",
+                  "example": "X1234"
+                },
+                "Nama": {
+                  "type": "string",
+                  "example": "Abdul Haris Mokondo"
+                },
+                "NoTlp": {
+                  "type": "string",
+                  "example": "080989999"
+                },
+                "Email": {
+                  "type": "string",
+                  "example": "kotekaman@gmail.com"
+                },
+                "Alamat": {
+                  "type": "string",
+                  "example": "Jl. Sudarso"
+                },
+                "TimeCreated": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/otlet/addpelanggan": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "registrasi otlet pelanggan",
+        "description": "",
+        "operationId": "registrasi",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NamaPelanggan",
+            "in": "formData",
+            "description": "Nama Suplier yang didaftarkan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Hp",
+            "in": "formData",
+            "description": "No Handphone Suplier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Email",
+            "in": "formData",
+            "description": "Email Suplier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Alamat",
+            "in": "formData",
+            "description": "Alamat Suplier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "IdSuplier": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "KodeUser": {
+                  "type": "string",
+                  "example": "X1234"
+                },
+                "Nama": {
+                  "type": "string",
+                  "example": "Abdul Haris Mokondo"
+                },
+                "NoTlp": {
+                  "type": "string",
+                  "example": "080989999"
+                },
+                "Email": {
+                  "type": "string",
+                  "example": "kotekaman@gmail.com"
+                },
+                "Alamat": {
+                  "type": "string",
+                  "example": "Jl. Sudarso"
+                },
+                "TimeCreated": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        }
       }
     }
   },

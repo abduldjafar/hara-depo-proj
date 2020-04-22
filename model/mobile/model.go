@@ -70,20 +70,13 @@ type Kategory struct {
 }
 
 type Pelanggan struct {
-	IDPelanggan  string `gorm:"PRIMARY_KEY"`
-	KodeUser     string
-	Nama         string
-	NoTelepon    string
-	Email        string
-	TanggalLahir time.Time
-	JenisKelamin string
-	Alamat       string
-	Provinsi     string
-	KotaKab      string
-	Kecamatan    string
-	Kelurahan    string
-	KodePos      string
-	TimeCreated  time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	IDPelanggan int `gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
+	KodeUser    string
+	Nama        string
+	NoTlp       string
+	Email       string
+	Alamat      string
+	TimeCreated time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
 type Stok struct {
@@ -94,43 +87,48 @@ type Stok struct {
 	StokAwal    int
 	StokAlarm   int
 	Pembelian   int
-	Penjualan   int
+	Penjualan   float32
 	Penyesuaian int
-	StokAkhir   int
+	StokAkhir   float32
 	TimeCreated time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
 type Suplier struct {
-	IdSuplier   string `gorm:"PRIMARY_KEY"`
+	IdSuplier   int `gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
 	KodeUser    string
 	Nama        string
 	NoTlp       string
 	Email       string
 	Alamat      string
-	Provinsi    string
-	KotaKab     string
-	Kecamatan   string
-	Kelurahan   string
-	KodePos     string
 	TimeCreated time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
-type Transaksi struct {
-	IdTransaksi    string
-	IdBarang       int
-	IdSuplier      int
+type TransaksiBarang struct {
+	IdTransaksi string
+	IdBarang    int
+	IdSuplier   int
+	Idpelanggan int
+	Qty         float32
+	KodeUser	string
+}
+
+type TransaksiUang struct {
+	IdTransaksi    string `gorm:"PRIMARY_KEY"`
+	KodeUser		string
 	IdPelanggan    int
-	IdPajak        int
-	IdDiskon       int
-	IdHutang       int
+	NamaKasir      string
 	KodeStruk      string
 	JenisTransaksi string
 	TipeTransaksi  string
-	Qty            int
-	Total          int
-	Pembulatan     int
+	Pajak          float32
+	Diskon         float32
+	Subtotal       float32
+	Total          float32
+	Pembulatan     float32
+	Utang          float32
 	CreateDate     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
+
 type RincianBelanja struct {
 	Rincian           []Rincianbelanja
 	TotalPembelanjaan float32
@@ -183,3 +181,32 @@ type Stokbarang struct {
 	StokAlarm int
 	StokAwal  int
 }
+
+/**
+{
+    "struk":{
+        "NO":"",
+        "NamaKasir":"",
+        "tanggal":""
+    },
+    "barang":[
+        {
+            "IsBarang":1,
+            "jumlah":2,
+        },
+        {
+            "IsBarang":2,
+            "jumlah":4
+        }
+    ],
+    "IdPelanggan":1,
+    "subtotal":25000,
+    "PPN10":2500,
+    "Total":27500,
+    "UangTunai":28000,
+    "Kembalian":500,
+    "JenisTransaksi":"Penjualan",
+    "JenisPembayaran":"Utang"
+}
+
+*/

@@ -4,7 +4,11 @@ import (
 	"hara-depo-proj/controller/Account/otp"
 	"hara-depo-proj/controller/Account/ownerotlet/barang"
 	"hara-depo-proj/controller/Account/ownerotlet/kategori"
+	"hara-depo-proj/controller/Account/ownerotlet/pelanggan"
 	"hara-depo-proj/controller/Account/ownerotlet/pembelian"
+	"hara-depo-proj/controller/Account/ownerotlet/penjualan"
+	"hara-depo-proj/controller/Account/ownerotlet/suplier"
+	"hara-depo-proj/controller/Account/ownerotlet/transaksi"
 	"hara-depo-proj/controller/Account/ownerotlet/user"
 	"net/http"
 )
@@ -63,4 +67,20 @@ func (app *App) UpdateBarangI(w http.ResponseWriter, r *http.Request) {
 
 func (app *App) UpdateKategoryI(w http.ResponseWriter, r *http.Request) {
 	kategori.UpdateKategory(app.TbKategori, w, r)
+}
+
+func (app *App) AddSuplier(w http.ResponseWriter, r *http.Request) {
+	suplier.AddSuplier(app.TbKategori, w, r)
+}
+
+func (app *App) AddPelanggan(w http.ResponseWriter, r *http.Request) {
+	pelanggan.AddPelanggan(app.TbKategori, w, r)
+}
+
+func (app *App) JualanBarang(w http.ResponseWriter, r *http.Request) {
+	penjualan.JualBarang(app.TbKategori, w, r)
+}
+
+func (app *App) ListTransaksi(w http.ResponseWriter, r *http.Request) {
+	transaksi.ListTransaksi(app.TbTransaksiUang,w,r)
 }

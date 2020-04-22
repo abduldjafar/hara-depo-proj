@@ -23,7 +23,7 @@ func DeleteKategoryOtletOwner(db *gorm.DB, w http.ResponseWriter, r *http.Reques
 		util.RespondError(w, http.StatusInternalServerError, "Data Sudah Dihapus")
 	} else {
 		if err := db.Model(&barang).Where("id_kategori=? AND kode_user=?", idkategory, kodeuser).
-			Update("id_kategori", 0).Error; err != nil {
+			Update("id_kategori", 1).Error; err != nil {
 			util.RespondError(w, http.StatusInternalServerError, "Internasl Service Error")
 		}
 

@@ -25,7 +25,7 @@ func AddKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
-	kategoryUndifined.KodeKategory = 0
+	kategoryUndifined.KodeKategory = 1
 	kategoryUndifined.KodeUser = kategory.KodeUser
 	kategoryUndifined.NamaKategory = "Undifined"
 

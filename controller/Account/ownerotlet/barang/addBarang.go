@@ -42,7 +42,7 @@ func AddBarang(db1 *gorm.DB, db2 *gorm.DB, w http.ResponseWriter, r *http.Reques
 	barang.IdKategori = idkategory
 	stok.StokAwal = stokawal
 	stok.StokAlarm = stokalarm
-	stok.StokAkhir = stok.StokAwal
+	stok.StokAkhir = float32(stok.StokAwal)
 	stok.KodeUser = KodeUser
 	stok.IdKategori = idkategory
 

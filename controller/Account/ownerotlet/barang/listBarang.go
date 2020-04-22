@@ -31,8 +31,10 @@ func ListBarangOtletOwner(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	dbOffset := page * 10
 
 	if err := db.Table("barang_otlet").Select("barang_otlet.kode_user,barang_otlet.id_barang,barang_otlet"+
-		".nama_barang,kategory.nama_kategory,barang_otlet.harga_jual,stok.stok_akhir as Jumlah").Joins("inner join stok on stok.id_barang = barang_otlet.id_barang").
+		".nama_barang,kategory.nama_kategory,barang_otlet.harga_jual,sum(stok.stok_akhir) as Jumlah").
+		Joins("inner join stok on stok.id_barang = barang_otlet.id_barang").
 		Joins("inner join kategory on kategory.kode_kategory = barang_otlet.id_kategori").
+		Group("barang_otlet.kode_user,barang_otlet.id_barang,barang_otlet.nama_barang,kategory.nama_kategory,barang_otlet.harga_jual").
 		Where("barang_otlet.kode_user=?", userJ).
 		Offset(dbOffset).
 		Limit(10).
