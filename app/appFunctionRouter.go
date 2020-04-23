@@ -82,5 +82,9 @@ func (app *App) JualanBarang(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *App) ListTransaksi(w http.ResponseWriter, r *http.Request) {
-	transaksi.ListTransaksi(app.TbTransaksiUang,w,r)
+	transaksi.ListTransaksi(app.TbTransaksiUang, w, r)
+}
+
+func (app *App) GetStrukTransaksi(w http.ResponseWriter, r *http.Request) {
+	transaksi.GetStrukTransaksi(app.TbTransaksiUang, w, r)
 }

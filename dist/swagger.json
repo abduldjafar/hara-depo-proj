@@ -958,28 +958,42 @@
           {
             "name": "NamaPelanggan",
             "in": "formData",
-            "description": "Nama Suplier yang didaftarkan",
+            "description": "Nama Pelanggan yang didaftarkan",
             "required": true,
             "type": "string"
           },
           {
             "name": "Hp",
             "in": "formData",
-            "description": "No Handphone Suplier",
+            "description": "No Handphone Pelanggan",
             "required": true,
             "type": "string"
           },
           {
             "name": "Email",
             "in": "formData",
-            "description": "Email Suplier",
+            "description": "Email Pelanggan",
             "required": false,
             "type": "string"
           },
           {
             "name": "Alamat",
             "in": "formData",
-            "description": "Alamat Suplier",
+            "description": "Alamat Pelanggan",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "TanggalLahir",
+            "in": "formData",
+            "description": "Tanggal Lahir Pelanggan",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Gender",
+            "in": "formData",
+            "description": "Gender Pelanggan",
             "required": false,
             "type": "string"
           }
@@ -1022,6 +1036,248 @@
             }
           }
         }
+      }
+    },
+    "/otlet/listtransaksi": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mengambil list transaksi",
+        "description": "",
+        "operationId": "/otlet/listtransaksi",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Halaman. nilai 0 untuk 1 - 10. 1 untuk 11 - 20. dst",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user otlet owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "sortir berdasarkan (utang,total,nama_kasir)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                  "type": "object",
+                  "properties": {
+                    "IdTransaksi":{
+                      "type": "string",
+                      "example": "476727"
+                    },
+                    "KodeUser":{
+                      "type": "string",
+                      "example": "lITy"
+                    },
+                    "IdPelanggan": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "NamaKasir":{
+                      "type": "string",
+                      "example": "Abdul Haris Djafar"
+                    },
+                    "KodeStruk":{
+                      "type": "string",
+                      "example": "xxx"
+                    },
+                    "JenisTransaksi":{
+                      "type": "string",
+                      "example": "Penjualan"
+                    },
+                    "TipeTransaksi":{
+                      "type": "string",
+                      "example": "Utang"
+                    },
+                    "Pajak":{
+                      "type": "number",
+                      "example": 10000
+                    },
+                    "Diskon":{
+                      "type": "number",
+                      "example": 5000
+                    },
+                    "Subtotal":{
+                      "type": "number",
+                      "example": 200000
+                    },
+                    "Total":{
+                      "type": "number",
+                      "example": 210000
+                    },
+                    "Pembulatan":{
+                      "type": "number",
+                      "example": 210000
+                    },
+                    "Utang": {
+                      "type": "number",
+                      "example": 1000
+                    },
+                    "CreateDate": {
+                      "type": "string",
+                      "example": "2020-04-21T14:54:31.610379+07:00"
+                    }
+                  }
+              }
+            }
+          },
+          "204": {
+            "description": "No items"
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/getstruk": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mendapatkan informasi struk",
+        "description": "",
+        "operationId": "/otlet/getstruk",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idtransaksi",
+            "description": "idbarang transaksi",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Detail": {
+                  "type": "object",
+                  "properties": {
+                    "KodeStruk":{
+                      "type": "string",
+                      "example": "xxx"
+                    },
+                    "TipeTransaksi":{
+                      "type": "string",
+                      "example": "Utang"
+                    },
+                    "CreateDate":{
+                      "type": "string",
+                      "example":  "2020-04-21T15:20:08.077458+07:00"
+                    }
+                  }
+                },
+                "Barang": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "NamaBarang":{
+                        "type": "string",
+                        "example": "Jas Jus"
+                      },
+                      "HargaJual":{
+                        "type": "number",
+                        "example": 25000
+                      },
+                      "Harga": {
+                        "type": "number",
+                        "example": 50000
+                      },
+                      "Qty":{
+                        "type": "number",
+                        "example": 2
+                    }
+                    }
+                  }
+                },
+                "Pajak":{
+                  "type": "number",
+                  "example": 1250
+                },
+                "Diskon":{
+                  "type": "number",
+                  "example": 2500
+                },
+                "Subtotal": {
+                  "type": "number",
+                  "example": 30000
+                },
+                "Total": {
+                  "type": "number",
+                  "example": 35000
+                },
+                "Pembulatan":{
+                  "type": "number",
+                  "example": 0
+                },
+                "Utang": {
+                  "type": "number",
+                  "example": 1000
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No item",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "No item"
+                }
+              }
+            }
+          }
+        },
+        "security": []
       }
     }
   },

@@ -6,6 +6,7 @@ func (app *App) setRouters() {
 	app.Post("/v1/otlet/otpconfirm", app.ConfirmOtp)
 	app.Post("/v1/otlet/addbarang", app.AddBarang)
 	app.GetQueryBarangSort("/v1/otlet/listbarang", app.ListBarang)
+	app.GetQueryStruk("/v1/otlet/getstruk", app.GetStrukTransaksi)
 	app.GetQueryBarangSort("/v1/otlet/listtransaksi", app.ListTransaksi)
 	app.GetQueryBarang("/v1/otlet/listkategori", app.ListKategori)
 	app.GetQueryBarang("/v1/otlet/listpersediaan", app.ListPersediaanBarang)

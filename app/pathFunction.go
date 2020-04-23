@@ -37,3 +37,7 @@ func (app *App) DeleteKategory(path string, f func(w http.ResponseWriter, r *htt
 func (app *App) UpdateBarang(path string, f func(w http.ResponseWriter, r *http.Request)) {
 	app.Router.HandleFunc(path, f).Methods("PUT")
 }
+
+func (app *App) GetQueryStruk(path string, f func(w http.ResponseWriter, r *http.Request)) {
+	app.Router.HandleFunc(path, f).Methods("GET").Queries("idtransaksi", "{idtransaksi}", "kodeuser", "{kodeuser}")
+}

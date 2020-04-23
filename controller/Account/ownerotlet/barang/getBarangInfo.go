@@ -13,9 +13,7 @@ func GetBarangInfo(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	barangs := mobile.BarangJoinStok{}
 	vars := mux.Vars(r)
 	idbarang := vars["idbarang"]
-	fmt.Println(idbarang)
 	kodeuser := vars["kodeuser"]
-	fmt.Println(kodeuser)
 
 	if err := db.Table("barang_otlet").Select("barang_otlet.kode_user,barang_otlet.id_barang,barang_otlet"+
 		".nama_barang,kategory.nama_kategory,barang_otlet.harga_jual,stok.stok_akhir").

@@ -13,6 +13,8 @@ func AddPelanggan(db1 *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	KodeUser := r.FormValue("KodeUser")
 	NamaSuplier := r.FormValue("NamaPelanggan")
+	Gender := r.FormValue("Gender")
+	TanggalLahir := r.FormValue("TanggalLahir")
 	NoHp := r.FormValue("Hp")
 	Email := r.FormValue("Email")
 	Alamat := r.FormValue("Alamat")
@@ -22,6 +24,8 @@ func AddPelanggan(db1 *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	pelanggan.NoTlp = NoHp
 	pelanggan.Email = Email
 	pelanggan.Alamat = Alamat
+	pelanggan.TanggalLahir = TanggalLahir
+	pelanggan.Gender = Gender
 
 	defer r.Body.Close()
 

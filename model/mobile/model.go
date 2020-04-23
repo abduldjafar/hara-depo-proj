@@ -70,13 +70,15 @@ type Kategory struct {
 }
 
 type Pelanggan struct {
-	IDPelanggan int `gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
-	KodeUser    string
-	Nama        string
-	NoTlp       string
-	Email       string
-	Alamat      string
-	TimeCreated time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	IDPelanggan  int `gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
+	KodeUser     string
+	Nama         string
+	NoTlp        string
+	Email        string
+	Alamat       string
+	Gender       string
+	TanggalLahir string
+	TimeCreated  time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
 type Stok struct {
@@ -109,12 +111,12 @@ type TransaksiBarang struct {
 	IdSuplier   int
 	Idpelanggan int
 	Qty         float32
-	KodeUser	string
+	KodeUser    string
 }
 
 type TransaksiUang struct {
 	IdTransaksi    string `gorm:"PRIMARY_KEY"`
-	KodeUser		string
+	KodeUser       string
 	IdPelanggan    int
 	NamaKasir      string
 	KodeStruk      string
