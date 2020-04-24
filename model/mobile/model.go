@@ -69,18 +69,6 @@ type Kategory struct {
 	TimeCreated  time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
-type Pelanggan struct {
-	IDPelanggan  int `gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
-	KodeUser     string
-	Nama         string
-	NoTlp        string
-	Email        string
-	Alamat       string
-	Gender       string
-	TanggalLahir string
-	TimeCreated  time.Time `gorm:"default:CURRENT_TIMESTAMP"`
-}
-
 type Stok struct {
 	IdStok      string `gorm:"PRIMARY_KEY"`
 	IdKategori  int

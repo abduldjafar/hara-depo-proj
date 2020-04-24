@@ -1279,6 +1279,185 @@
         },
         "security": []
       }
+    },
+    "/otlet/listpelanggan": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mendapatkan informasi struk",
+        "description": "",
+        "operationId": "/otlet/getstruk",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Halaman. nilai 0 untuk 1 - 10. 1 untuk 11 - 20. dst",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Penjualan": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Nama":{
+                        "type": "string",
+                        "example": "Abdul Koteka"
+                      },
+                      "IDPelanggan":{
+                        "type": "number",
+                        "example": 1
+                      },
+                      "Utang": {
+                        "type": "number",
+                        "example": 50000
+                      }
+                    }
+                  }
+                },
+                "TotalPiutang": {
+                  "type": "object",
+                  "properties": {
+                    "TotalPiutang":{
+                      "type": "number",
+                      "example": "2000000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No item",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "No item"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/infopelanggan": {
+      "get": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Mendapatkan informasi struk",
+        "description": "",
+        "operationId": "/otlet/getstruk",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idpelanggan",
+            "description": "id pelanggan ya didaftarkan",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Nama":{
+                  "type": "string",
+                  "example":"Abdul Karim"
+                },
+                "Hp":{
+                  "type": "string",
+                  "example": "082199645601"
+                },
+                "PelangganSejak": {
+                  "type": "string",
+                  "example": "2020-04-21T08:04:27.024573+07:00"
+                },
+                "KunjunganTerakhir":{
+                  "type": "string",
+                  "example": "2020-04-21T15:20:08.077458+07:00"
+                },
+                "Piutang":{
+                  "type": "number",
+                  "example": 20000
+                },
+                "JumlahTransaksi":{
+                  "type": "number",
+                  "example": 2
+                },
+                "NilaiTransaksi":{
+                  "type": "number",
+                  "example": 420000
+                },
+                "RataTransaksi":{
+                  "type": "number",
+                  "example": 210000
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No item",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "No item"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
     }
   },
   "securityDefinitions": {

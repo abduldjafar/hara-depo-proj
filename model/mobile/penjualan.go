@@ -1,7 +1,7 @@
 package mobile
 
 type RequestJualan struct {
-	KodeUser		string
+	KodeUser        string
 	Struk           struk
 	Barang          []barang
 	IdPelanggan     int
@@ -26,4 +26,19 @@ type struk struct {
 type barang struct {
 	IdBarang int
 	Jumlah   float32
+}
+
+type ListPenjualan struct {
+	Nama        string
+	IDPelanggan int
+	Utang       float32
+}
+
+type ResponseListPenjualan struct {
+	Penjualan    []ListPenjualan
+	TotalPiutang TotalUtang
+}
+
+type TotalUtang struct {
+	TotalPiutang float32
 }

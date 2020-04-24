@@ -41,3 +41,7 @@ func (app *App) UpdateBarang(path string, f func(w http.ResponseWriter, r *http.
 func (app *App) GetQueryStruk(path string, f func(w http.ResponseWriter, r *http.Request)) {
 	app.Router.HandleFunc(path, f).Methods("GET").Queries("idtransaksi", "{idtransaksi}", "kodeuser", "{kodeuser}")
 }
+
+func (app *App) GetQueryPelanggan(path string, f func(w http.ResponseWriter, r *http.Request)) {
+	app.Router.HandleFunc(path, f).Methods("GET").Queries("idpelanggan", "{idpelanggan}", "kodeuser", "{kodeuser}")
+}

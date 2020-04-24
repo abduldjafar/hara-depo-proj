@@ -88,3 +88,11 @@ func (app *App) ListTransaksi(w http.ResponseWriter, r *http.Request) {
 func (app *App) GetStrukTransaksi(w http.ResponseWriter, r *http.Request) {
 	transaksi.GetStrukTransaksi(app.TbTransaksiUang, w, r)
 }
+
+func (app *App) ListPelanggan(w http.ResponseWriter, r *http.Request) {
+	pelanggan.ListPelanggan(app.TbTransaksiUang, w, r)
+}
+
+func (app *App) DetailPelanggan(w http.ResponseWriter, r *http.Request) {
+	pelanggan.DetailPelanggan(app.TbTransaksiUang, w, r)
+}
