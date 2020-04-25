@@ -36,6 +36,7 @@ func UpdatePelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		return
 	}
-	util.RespondJSON(w, http.StatusOK, datas)
+
+	util.RespondJSON(w, http.StatusOK, pelanggan)
 
 }

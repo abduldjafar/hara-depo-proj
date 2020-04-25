@@ -100,3 +100,7 @@ func (app *App) DetailPelanggan(w http.ResponseWriter, r *http.Request) {
 func (app *App) UpdatePelanggan(w http.ResponseWriter, r *http.Request) {
 	pelanggan.UpdatePelanggan(app.TbTransaksiUang, w, r)
 }
+
+func (app *App) DeletePelangganI(w http.ResponseWriter, r *http.Request) {
+	pelanggan.DeletePelanggan(app.TbTransaksiUang, w, r)
+}

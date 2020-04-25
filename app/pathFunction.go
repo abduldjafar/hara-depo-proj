@@ -49,3 +49,7 @@ func (app *App) GetQueryPelanggan(path string, f func(w http.ResponseWriter, r *
 func (app *App) GetQueryListPelanggan(path string, f func(w http.ResponseWriter, r *http.Request)) {
 	app.Router.HandleFunc(path, f).Methods("GET").Queries("page", "{page}", "kodeuser", "{kodeuser}", "filter", "{filter}", "sort", "{sort}")
 }
+
+func (app *App) DeletePelanggan(path string, f func(w http.ResponseWriter, r *http.Request)) {
+	app.Router.HandleFunc(path, f).Methods("DELETE").Queries("kodeuser", "{kodeuser}", "idpelanggan", "{idpelanggan}")
+}

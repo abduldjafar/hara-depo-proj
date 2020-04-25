@@ -752,6 +752,112 @@
         "security": []
       }
     },
+    "/otlet/updatepelanggan": {
+      "put": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "update otlet pelanggan",
+        "description": "",
+        "operationId": "update",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "KodeUser",
+            "in": "formData",
+            "description": "Kode User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Nama",
+            "in": "formData",
+            "description": "Nama Pelanggan yang didaftarkan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Hp",
+            "in": "formData",
+            "description": "No Handphone Pelanggan",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Email",
+            "in": "formData",
+            "description": "Email Pelanggan",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Alamat",
+            "in": "formData",
+            "description": "Alamat Pelanggan",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "TanggalLahir",
+            "in": "formData",
+            "description": "Tanggal Lahir Pelanggan",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Gender",
+            "in": "formData",
+            "description": "Gender Pelanggan",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "IdPelanggan": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "KodeUser": {
+                  "type": "string",
+                  "example": "X1234"
+                },
+                "Nama": {
+                  "type": "string",
+                  "example": "Abdul Haris Mokondo"
+                },
+                "NoTlp": {
+                  "type": "string",
+                  "example": "080989999"
+                },
+                "Email": {
+                  "type": "string",
+                  "example": "kotekaman@gmail.com"
+                },
+                "Alamat": {
+                  "type": "string",
+                  "example": "Jl. Sudarso"
+                },
+                "TimeCreated": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "description": "Output hasil update akan keluar sesuai dengan field yang di update"
+            }
+          }
+        }
+      }
+    },
     "/otlet/deletebarang": {
       "delete": {
         "tags": [
@@ -825,6 +931,51 @@
             "in": "query",
             "name": "kodekategory",
             "description": "kode kategory",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/deletepelanggan": {
+      "delete": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Menghapus Pelanggan",
+        "description": "",
+        "operationId": "/otlet/baranginfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "kodeuser",
+            "description": "kode user yang telah didaftar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "idpelanggan",
+            "description": "id pelanggan yang telah terdaftar",
             "required": true,
             "schema": {
               "type": "string"

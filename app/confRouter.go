@@ -21,6 +21,7 @@ func (app *App) setRouters() {
 	app.Post("/v1/otlet/penjualan", app.JualanBarang)
 	app.DeleteBarang("/v1/otlet/deletebarang", app.DeleteBarangI)
 	app.DeleteKategory("/v1/otlet/deletekategori", app.DeleteKategoryI)
+	app.DeletePelanggan("/v1/otlet/deletepelanggan", app.DeletePelangganI)
 	app.UpdateBarang("/v1/otlet/updatebarang", app.UpdateBarangI)
 	app.UpdateBarang("/v1/otlet/updatekategori", app.UpdateKategoryI)
 	app.UpdateBarang("/v1/otlet/updatepelanggan", app.UpdatePelanggan)
