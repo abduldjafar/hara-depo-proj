@@ -39,14 +39,3 @@ func UpdatePelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	util.RespondJSON(w, http.StatusOK, datas)
 
 }
-
-/*
-"KodeUser": "lITy",
-  "Nama": "putria kusuma",
-  "NoTlp": "082199645601",
-  "Email": "",
-  "Alamat": "Jl Yusodarso",
-  "Gender": "Laki - Laki",
-  "TanggalLahir": "12/05/2017",
-  "TimeCreated": "2020-04-25T11:55:24.8077+07:00"
-*/
