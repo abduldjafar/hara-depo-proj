@@ -32,11 +32,11 @@ func UpdateBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	for _, data := range listkeysBarang {
 		if r.FormValue(data) != "" {
 			if data == "IdKategori" || data == "IdBarang" {
-				idkategory, err := strconv.Atoi(r.FormValue(data))
+				id, err := strconv.Atoi(r.FormValue(data))
 				if err != nil {
-					fmt.Println("========================")
+					log.Println(err.Error())
 				} else {
-					datasBarang[data] = idkategory
+					datasBarang[data] = id
 				}
 			} else if data == "HargaBeli" || data == "HargaJual" {
 				harga, _ := strconv.ParseFloat(r.FormValue(data), 32)

@@ -96,3 +96,7 @@ func (app *App) ListPelanggan(w http.ResponseWriter, r *http.Request) {
 func (app *App) DetailPelanggan(w http.ResponseWriter, r *http.Request) {
 	pelanggan.DetailPelanggan(app.TbTransaksiUang, w, r)
 }
+
+func (app *App) UpdatePelanggan(w http.ResponseWriter, r *http.Request) {
+	pelanggan.UpdatePelanggan(app.TbTransaksiUang, w, r)
+}

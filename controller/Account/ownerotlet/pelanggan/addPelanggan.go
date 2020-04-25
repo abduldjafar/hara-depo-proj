@@ -6,6 +6,7 @@ import (
 	"hara-depo-proj/otp"
 	"hara-depo-proj/util"
 	"net/http"
+	"time"
 )
 
 func AddPelanggan(db1 *gorm.DB, w http.ResponseWriter, r *http.Request) {
@@ -41,6 +42,7 @@ func AddPelanggan(db1 *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		kodeTransaksi := otp.RandomStringOTP(6)
 		transaksi.IdPelanggan = pelanggan.IDPelanggan
 		transaksi.IdTransaksi = kodeTransaksi
+		transaksi.CreateDate = time.Now()
 		if err := db1.Save(&transaksi).Error; err != nil {
 			util.RespondError(w, http.StatusInternalServerError, err.Error())
 			return

@@ -45,3 +45,7 @@ func (app *App) GetQueryStruk(path string, f func(w http.ResponseWriter, r *http
 func (app *App) GetQueryPelanggan(path string, f func(w http.ResponseWriter, r *http.Request)) {
 	app.Router.HandleFunc(path, f).Methods("GET").Queries("idpelanggan", "{idpelanggan}", "kodeuser", "{kodeuser}")
 }
+
+func (app *App) GetQueryListPelanggan(path string, f func(w http.ResponseWriter, r *http.Request)) {
+	app.Router.HandleFunc(path, f).Methods("GET").Queries("page", "{page}", "kodeuser", "{kodeuser}", "filter", "{filter}", "sort", "{sort}")
+}

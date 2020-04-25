@@ -5,9 +5,11 @@ type RequestJualan struct {
 	Struk           struk
 	Barang          []barang
 	IdPelanggan     int
-	Diskon          float32
+	DiskonNominal   float32
+	DiskonDecimal   float32
 	Subtotal        float32
-	PPN             float32
+	PPNNominal      float32
+	PPNDecimal      float32
 	Total           float32
 	Pembulatan      float32
 	UangTunai       float32

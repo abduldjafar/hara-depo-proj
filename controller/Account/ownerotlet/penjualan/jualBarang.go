@@ -20,9 +20,6 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	uang := mobile.TransaksiUang{}
 
-
-
-
 	body, err1 := ioutil.ReadAll(r.Body)
 
 	err1 = json.Unmarshal(body, &jualan)
@@ -36,7 +33,7 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	for _, data := range jualan.Barang {
 
 		var stok mobile.Stok
-		var stokBaru  mobile.Stok
+		var stokBaru mobile.Stok
 		var barang mobile.BarangOtlet
 
 		Tbarang.IdBarang = data.IdBarang
@@ -49,26 +46,21 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-
-		if err := db.Where("id_barang=?",data.IdBarang).Find(&barang).Error; err != nil {
+		if err := db.Where("id_barang=?", data.IdBarang).Find(&barang).Error; err != nil {
 			util.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
-
-		log.Println(barang)
 
 		if err := db.Where("id_kategori=? AND kode_user=? AND id_barang=?",
-			strconv.Itoa(barang.IdKategori),jualan.KodeUser,strconv.Itoa(data.IdBarang)).Order("time_created asc").First(&stok).Error; err != nil {
+			strconv.Itoa(barang.IdKategori), jualan.KodeUser, strconv.Itoa(data.IdBarang)).Order("time_created asc").First(&stok).Error; err != nil {
 			util.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
-
-
 
 		stokBaru = stok
 		stokBaru.IdStok = otp.RandomString(5)
 		stokBaru.Penjualan = data.Jumlah
-		stokBaru.StokAkhir = - data.Jumlah
+		stokBaru.StokAkhir = -data.Jumlah
 
 		if err := db.Save(&stokBaru).Error; err != nil {
 			util.RespondError(w, http.StatusInternalServerError, err.Error())
@@ -78,25 +70,30 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	uang.IdTransaksi = kodeTransaksi
 	uang.IdPelanggan = jualan.IdPelanggan
-	uang.Diskon = jualan.Diskon
+	uang.DiskonNominal = jualan.DiskonNominal
+	uang.DiskonDecimal = jualan.DiskonDecimal
 	uang.Utang = jualan.Utang
-	uang.Pajak = jualan.PPN
+	uang.PajakNominal = jualan.PPNNominal
+	uang.PajakDecimal = jualan.PPNDecimal
 	uang.Subtotal = jualan.Subtotal
 	uang.Total = jualan.Total
-	uang.KodeStruk = jualan.Struk.No
+
 	uang.NamaKasir = jualan.Struk.NamaKasir
 	uang.JenisTransaksi = jualan.JenisTransaksi
 	uang.TipeTransaksi = jualan.JenisPembayaran
 	uang.Pembulatan = jualan.Pembulatan
 	uang.KodeUser = jualan.KodeUser
+	jualan.Struk.No = otp.RandomStringOTP(6)
+	uang.KodeStruk = jualan.Struk.No
 
 	if err := db.Save(&uang).Error; err != nil {
 		util.RespondError(w, http.StatusInternalServerError, err.Error())
 		log.Println(err.Error())
 		return
 	} else {
-		log.Println("sukses save data transaksi")
+		log.Println("sukses save data transaksi ==> kode " + kodeTransaksi)
 	}
-	util.RespondJSON(w,200,jualan)
+	jualan.Struk.Tanggal = uang.CreateDate.String()
+	util.RespondJSON(w, 200, jualan)
 
 }

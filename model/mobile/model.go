@@ -93,32 +93,6 @@ type Suplier struct {
 	TimeCreated time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
-type TransaksiBarang struct {
-	IdTransaksi string
-	IdBarang    int
-	IdSuplier   int
-	Idpelanggan int
-	Qty         float32
-	KodeUser    string
-}
-
-type TransaksiUang struct {
-	IdTransaksi    string `gorm:"PRIMARY_KEY"`
-	KodeUser       string
-	IdPelanggan    int
-	NamaKasir      string
-	KodeStruk      string
-	JenisTransaksi string
-	TipeTransaksi  string
-	Pajak          float32
-	Diskon         float32
-	Subtotal       float32
-	Total          float32
-	Pembulatan     float32
-	Utang          float32
-	CreateDate     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
-}
-
 type RincianBelanja struct {
 	Rincian           []Rincianbelanja
 	TotalPembelanjaan float32

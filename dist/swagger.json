@@ -1004,7 +1004,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "IdSuplier": {
+                "IdPelanggan": {
                   "type": "integer",
                   "example": 2
                 },
@@ -1312,6 +1312,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "memfilter data berdasarkan (piutang dan semua). value (piutang,semua)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "mengurutkan data berdasarkan (abjad,piutang,transaksi,new). value (abjad,piutang,transaksi,new)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1453,6 +1471,48 @@
                   "example": "No item"
                 }
               }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/penjualan": {
+      "post": {
+        "tags": [
+          "otlet"
+        ],
+        "summary": "Penjualan Barang",
+        "description": "",
+        "operationId": "/otlet/penjualan",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Penjualan Barang Otlet",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Penjualan"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ResponsePenjualan"
+            }
+          },
+          "409": {
+            "description": "User Registered",
+            "schema": {
+              "$ref": "#/definitions/ResponOtp"
             }
           }
         },
@@ -1753,6 +1813,196 @@
         "KodeReferensi":{
           "type": "string",
           "example": "xxxxx-xxxxx-xxxxx"
+        }
+      }
+    },
+    "Penjualan": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+        "KodeUser":{
+          "type": "string",
+          "example": "lITy"
+        },
+        "Struk":{
+          "type": "object",
+          "properties": {
+            "NamaKasir":{
+              "type": "string",
+              "example": "Nurlela"
+            }
+          }
+        },
+        "Barang":{
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "IdBarang": {
+                "type": "integer",
+                "example": 2
+              },
+              "Jumlah": {
+                "type": "integer",
+                "example": 2
+              }
+            }
+          }
+        },
+        "IdPelanggan":{
+          "type": "integer",
+          "example": 7
+        },
+        "Subtotal":{
+          "type": "number",
+          "example": 20000
+        },
+        "PPNNominal":{
+          "type": "number",
+          "example": 2000
+        },
+        "PPNDecimal":{
+          "type": "number",
+          "example": 0.2
+        },
+        "Total":{
+          "type": "number",
+          "example": 2000000
+        },
+        "UangTunai":{
+          "type": "number",
+          "example": 300000
+        },
+        "Kembalian":{
+          "type": "number",
+          "example": 3000
+        },
+        "DiskonNominal":{
+          "type": "number",
+          "example": 25000
+        },
+        "DiskonDecimal":{
+          "type": "number",
+          "example": 0.25
+        },
+        "Utang":{
+          "type": "number",
+          "example": 3000
+        },
+        "Pembulatan":{
+          "type": "number",
+          "example": 45000
+        },
+        "JenisTransaksi":{
+          "type": "string",
+          "example": "Penjualan",
+          "description": "(Penjualan,Pembelian)"
+        },
+        "JenisPembayaran":{
+          "type": "string",
+          "example": "Utang",
+          "description": "(Utang,Lunas)"
+        }
+      }
+    },
+    "ResponsePenjualan": {
+      "type": "object",
+      "required": [
+        "KodeUser"
+      ],
+      "properties": {
+        "KodeUser":{
+          "type": "string",
+          "example": "lITy"
+        },
+        "Struk":{
+          "type": "object",
+          "properties": {
+            "NamaKasir":{
+              "type": "string",
+              "example": "Nurlela"
+            },
+            "No": {
+              "type": "string",
+              "example": "123456"
+            },
+            "Tanggal": {
+              "type": "string",
+              "example": "2020-04-25 21:44:37.775157 +0700 WIB"
+            }
+          }
+        },
+        "Barang":{
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "IdBarang": {
+                "type": "integer",
+                "example": 2
+              },
+              "Jumlah": {
+                "type": "integer",
+                "example": 2
+              }
+            }
+          }
+        },
+        "IdPelanggan":{
+          "type": "integer",
+          "example": 7
+        },
+        "Subtotal":{
+          "type": "number",
+          "example": 20000
+        },
+        "PPNNominal":{
+          "type": "number",
+          "example": 2000
+        },
+        "PPNDecimal":{
+          "type": "number",
+          "example": 0.2
+        },
+        "Total":{
+          "type": "number",
+          "example": 2000000
+        },
+        "UangTunai":{
+          "type": "number",
+          "example": 300000
+        },
+        "Kembalian":{
+          "type": "number",
+          "example": 3000
+        },
+        "DiskonNominal":{
+          "type": "number",
+          "example": 25000
+        },
+        "DiskonDecimal":{
+          "type": "number",
+          "example": 0.25
+        },
+        "Utang":{
+          "type": "number",
+          "example": 3000
+        },
+        "Pembulatan":{
+          "type": "number",
+          "example": 45000
+        },
+        "JenisTransaksi":{
+          "type": "string",
+          "example": "Penjualan",
+          "description": "(Penjualan,Pembelian)"
+        },
+        "JenisPembayaran":{
+          "type": "string",
+          "example": "Utang",
+          "description": "(Utang,Lunas)"
         }
       }
     }

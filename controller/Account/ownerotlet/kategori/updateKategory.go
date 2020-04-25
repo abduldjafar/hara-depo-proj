@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -25,6 +26,7 @@ func UpdateKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if err := db.Model(&kategory).Updates(dataskategory).Error; err != nil {
+		log.Println(err.Error())
 		util.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
