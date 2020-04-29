@@ -1,15 +1,17 @@
 package transaksi
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	"github.com/jinzhu/gorm"
 )
 
-func ListTransaksi(db *gorm.DB,w http.ResponseWriter, r *http.Request){
+func ListTransaksi(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+
 	transaksi := []mobile.TransaksiUang{}
 	vars := mux.Vars(r)
 	page, _ := strconv.Atoi(vars["page"])
@@ -29,11 +31,10 @@ func ListTransaksi(db *gorm.DB,w http.ResponseWriter, r *http.Request){
 		qsort = "nama_kasir asc"
 	}
 
-
-	if err := db.Where("kode_user=?",userJ).Offset(dbOffset).Limit(10).Order(qsort).Find(&transaksi).Error; err != nil {
+	if err := db.Where("kode_user=?", userJ).Offset(dbOffset).Limit(10).Order(qsort).Find(&transaksi).Error; err != nil {
 		util.RespondError(w, http.StatusInternalServerError, "error get datas")
 		return
 	}
 
-	util.RespondJSON(w,202,transaksi)
+	util.RespondJSON(w, 202, transaksi)
 }

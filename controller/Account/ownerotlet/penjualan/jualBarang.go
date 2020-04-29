@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
@@ -85,7 +86,10 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	uang.KodeUser = jualan.KodeUser
 	jualan.Struk.No = otp.RandomStringOTP(6)
 	uang.KodeStruk = jualan.Struk.No
-
+	tanggalPelunasan, _ := time.Parse("2006-01-02", jualan.TanggalPelunasan)
+	uang.TanggalPelunasan = tanggalPelunasan
+	uang.Note = jualan.Note
+	log.Println(tanggalPelunasan)
 	if err := db.Save(&uang).Error; err != nil {
 		util.RespondError(w, http.StatusInternalServerError, err.Error())
 		log.Println(err.Error())

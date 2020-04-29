@@ -1,11 +1,12 @@
 package transaksi
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/jinzhu/gorm"
 )
 
 func GetStrukTransaksi(db *gorm.DB, w http.ResponseWriter, r *http.Request) {

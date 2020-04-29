@@ -2046,15 +2046,24 @@
           "type": "number",
           "example": 45000
         },
-        "JenisTransaksi":{
+        "JenisTransaksi": {
           "type": "string",
           "example": "Penjualan",
           "description": "(Penjualan,Pembelian)"
         },
-        "JenisPembayaran":{
+        "JenisPembayaran": {
           "type": "string",
           "example": "Utang",
           "description": "(Utang,Lunas)"
+        },
+        "Note": {
+          "type": "string",
+          "example": "string"
+        },
+        "TanggalPelunasan": {
+          "type": "string",
+          "example": "2019-05-20",
+          "description": "format (YYYY-MM-DD)"
         }
       }
     },
@@ -2145,15 +2154,24 @@
           "type": "number",
           "example": 45000
         },
-        "JenisTransaksi":{
+        "JenisTransaksi": {
           "type": "string",
           "example": "Penjualan",
           "description": "(Penjualan,Pembelian)"
         },
-        "JenisPembayaran":{
+        "JenisPembayaran": {
           "type": "string",
           "example": "Utang",
           "description": "(Utang,Lunas)"
+        },
+        "Note": {
+          "type": "string",
+          "example": "string"
+        },
+        "TanggalPelunasan": {
+          "type": "string",
+          "example": "2019-05-20",
+          "description": "format (YYYY-MM-DD)"
         }
       }
     }

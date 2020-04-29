@@ -1,22 +1,24 @@
 package mobile
 
 type RequestJualan struct {
-	KodeUser        string
-	Struk           struk
-	Barang          []barang
-	IdPelanggan     int
-	DiskonNominal   float32
-	DiskonDecimal   float32
-	Subtotal        float32
-	PPNNominal      float32
-	PPNDecimal      float32
-	Total           float32
-	Pembulatan      float32
-	UangTunai       float32
-	Kembalian       float32
-	Utang           float32
-	JenisTransaksi  string
-	JenisPembayaran string
+	KodeUser         string
+	Struk            struk
+	Barang           []barang
+	IdPelanggan      int
+	DiskonNominal    float32
+	DiskonDecimal    float32
+	Subtotal         float32
+	PPNNominal       float32
+	PPNDecimal       float32
+	Total            float32
+	Pembulatan       float32
+	UangTunai        float32
+	Kembalian        float32
+	Utang            float32
+	Note             string
+	TanggalPelunasan string
+	JenisTransaksi   string
+	JenisPembayaran  string
 }
 
 type struk struct {

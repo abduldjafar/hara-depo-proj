@@ -34,20 +34,22 @@ type TransaksiBarang struct {
 }
 
 type TransaksiUang struct {
-	IdTransaksi    string `gorm:"PRIMARY_KEY"`
-	KodeUser       string
-	IdPelanggan    int
-	NamaKasir      string
-	KodeStruk      string
-	JenisTransaksi string
-	TipeTransaksi  string
-	PajakNominal   float32
-	PajakDecimal   float32
-	DiskonNominal  float32
-	DiskonDecimal  float32
-	Subtotal       float32
-	Total          float32
-	Pembulatan     float32
-	Utang          float32
-	CreateDate     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	IdTransaksi      string `gorm:"PRIMARY_KEY"`
+	KodeUser         string
+	IdPelanggan      int
+	NamaKasir        string
+	KodeStruk        string
+	JenisTransaksi   string
+	TipeTransaksi    string
+	PajakNominal     float32
+	PajakDecimal     float32
+	DiskonNominal    float32
+	DiskonDecimal    float32
+	Subtotal         float32
+	Total            float32
+	Pembulatan       float32
+	Utang            float32
+	Note             string
+	TanggalPelunasan time.Time
+	CreateDate       time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
