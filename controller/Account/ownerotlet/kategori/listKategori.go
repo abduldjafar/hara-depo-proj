@@ -5,7 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"net/http"
 	"strconv"
 )
@@ -41,7 +41,7 @@ func ListKategori(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		Where("stok.kode_user = ?", user).Offset(dbOffset).Limit(10).Find(&kategori).Error; err != nil {
 		var resp = map[string]interface{}{"status": false, "message": "Something Wrong"}
 		fmt.Println(resp)
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 
 	}
 
@@ -54,7 +54,7 @@ func ListKategori(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			Find(&barangs).Error; err != nil {
 			var resp = map[string]interface{}{"status": false, "message": "Something Wrong"}
 			fmt.Println(resp)
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 
 		}
 
@@ -62,5 +62,5 @@ func ListKategori(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		response = append(response, data)
 		//response = unique(response)
 	}
-	util.RespondJSON(w, http.StatusOK, response)
+	customResponse.RespondJSON(w, http.StatusOK, response)
 }

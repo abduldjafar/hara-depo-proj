@@ -5,7 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"net/http"
 	"strconv"
 )
@@ -43,6 +43,6 @@ func ListBarangOtletOwner(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		var resp = map[string]interface{}{"status": false, "message": "Something Wrong"}
 		fmt.Println(resp)
 	}
-	util.RespondJSON(w, http.StatusOK, barangs)
+	customResponse.RespondJSON(w, http.StatusOK, barangs)
 
 }

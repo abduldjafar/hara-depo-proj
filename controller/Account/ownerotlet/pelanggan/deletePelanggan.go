@@ -4,7 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"net/http"
 )
 
@@ -18,14 +18,14 @@ func DeletePelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	if err := db.Where("id_pelanggan=? AND kode_user=?", idpelanggan, kodeuser).
 		First(&pelanggan).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, "Data Sudah Dihapus")
+		customResponse.RespondError(w, http.StatusInternalServerError, "Data Sudah Dihapus")
 	} else {
 		if err := db.Where("id_pelanggan=? AND kode_user=?", idpelanggan, kodeuser).
 			Delete(&pelanggan).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, "Internasl Service Error")
+			customResponse.RespondError(w, http.StatusInternalServerError, "Internasl Service Error")
 		}
 		response.Message = "Pelanggan Terhapus"
 		response.Status = 200
-		util.RespondJSON(w, 200, response)
+		customResponse.RespondJSON(w, 200, response)
 	}
 }

@@ -2,7 +2,7 @@ package transaksi
 
 import (
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"log"
 	"net/http"
 	"strconv"
@@ -35,7 +35,7 @@ func ListTransaksi(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := db.Where("kode_user=?", userJ).Offset(dbOffset).Limit(10).Order(qsort).Find(&transaksi).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, "error get datas")
+		customResponse.RespondError(w, http.StatusInternalServerError, "error get datas")
 		return
 	}
 
@@ -43,11 +43,11 @@ func ListTransaksi(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		var hutang mobile.Hutang
 		if err := db.Where("id_hutang=?", data.IdHutang).First(&hutang).Error; err != nil {
 			log.Println(err.Error())
-			util.RespondError(w, http.StatusInternalServerError, "error get datas")
+			customResponse.RespondError(w, http.StatusInternalServerError, "error get datas")
 			return
 		}
 
 		response = append(response, data)
 	}
-	util.RespondJSON(w, 202, response)
+	customResponse.RespondJSON(w, 202, response)
 }

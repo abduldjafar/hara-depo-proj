@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"io/ioutil"
 	"net/http"
 )
@@ -51,5 +51,5 @@ func BeliBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	rincian.Rincian = listBelanja
 	rincian.TotalPembelanjaan = sum
-	util.RespondJSON(w, http.StatusOK, rincian)
+	customResponse.RespondJSON(w, http.StatusOK, rincian)
 }

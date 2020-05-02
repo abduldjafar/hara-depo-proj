@@ -3,7 +3,7 @@ package kategori
 import (
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"log"
 	"net/http"
 	"strconv"
@@ -27,9 +27,9 @@ func UpdateKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	if err := db.Model(&kategory).Updates(dataskategory).Error; err != nil {
 		log.Println(err.Error())
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	util.RespondJSON(w, http.StatusOK, dataskategory)
+	customResponse.RespondJSON(w, http.StatusOK, dataskategory)
 
 }

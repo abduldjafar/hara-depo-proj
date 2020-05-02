@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"io/ioutil"
 	"net/http"
 )
@@ -23,13 +23,13 @@ func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	_ = err2
 
 	if err := db.Save(&user).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, "error save user data")
+		customResponse.RespondError(w, http.StatusInternalServerError, "error save user data")
 		return
 	}
 
 	if err := db.Save(&toko).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, "error save data toko")
+		customResponse.RespondError(w, http.StatusInternalServerError, "error save data toko")
 		return
 	}
-	util.RespondOk(w, 200, "Outlet berhasil Didaftarkan")
+	customResponse.RespondOk(w, 200, "Outlet berhasil Didaftarkan")
 }

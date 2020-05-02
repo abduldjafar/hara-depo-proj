@@ -7,7 +7,7 @@ import (
 	user3 "hara-depo-proj/controller/Account/ownerotlet/user"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/redis"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -47,32 +47,32 @@ func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			err2 := user3.FindUserStatus(db, user.Hp, "Disabled")
 			if err2 != nil {
 				if err := db.Save(&userOtlet).Error; err != nil {
-					util.RespondError(w, http.StatusInternalServerError, err.Error())
+					customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 					return
 				}
 				redis.DeleteDataFromRedis(user.KodeUser + "-register-login-count")
 				response.Messages = "register"
 				response.User = nil
 				response.TokoUser = nil
-				util.RespondJSON(w, 200, response)
+				customResponse.RespondJSON(w, 200, response)
 			} else {
 				userOtlet := mobile.UserOtlet{}
 				toko := mobile.Toko{}
 				response := mobile.ResponseOtp{}
 
 				if err := db.Where("user_otlet.kode_user=? AND user_otlet.hp=?", user.KodeUser, user.Hp).Find(&userOtlet).Error; err != nil {
-					util.RespondError(w, http.StatusInternalServerError, err.Error())
+					customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 					return
 				}
 				if err := db.Where("toko.kode_user=?", user.KodeUser).Find(&toko).Error; err != nil {
-					util.RespondError(w, http.StatusInternalServerError, err.Error())
+					customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 					return
 				}
 				response.Messages = "home"
 				response.User = userOtlet
 				response.TokoUser = toko
 				redis.DeleteDataFromRedis(user.KodeUser + "-register-login-count")
-				util.RespondJSON(w, 200, response)
+				customResponse.RespondJSON(w, 200, response)
 			}
 		} else {
 			cleanRedis(user)
@@ -81,24 +81,24 @@ func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			response := mobile.ResponseOtp{}
 
 			if err := db.Where("user_otlet.kode_user=? AND user_otlet.hp=?", user.KodeUser, user.Hp).Find(&userOtlet).Error; err != nil {
-				util.RespondError(w, http.StatusInternalServerError, err.Error())
+				customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 				return
 			}
 			if err := db.Where("toko.kode_user=?", user.KodeUser).Find(&toko).Error; err != nil {
-				util.RespondError(w, http.StatusInternalServerError, err.Error())
+				customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 				return
 			}
 			response.Messages = "home"
 			response.User = userOtlet
 			response.TokoUser = toko
-			util.RespondJSON(w, 200, response)
+			customResponse.RespondJSON(w, 200, response)
 		}
 
 	} else {
 		errLogincount := redis.GetData(user.KodeUser + "-register-login-count")
 		if errLogincount != nil {
 			redis.SaveData(user.KodeUser+"-register-login-count", strconv.Itoa(1))
-			util.RespondError(w, http.StatusConflict, "Login failed")
+			customResponse.RespondError(w, http.StatusConflict, "Login failed")
 		} else {
 			value := redis.GetDataFromRedis(user.KodeUser + "-register-login-count")
 			fmt.Println(value)
@@ -107,11 +107,11 @@ func OtpUserConfirm(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 			redis.SaveData(user.KodeUser+"-register-login-count", strconv.Itoa(countFromRedis))
 
 			if countFromRedis > 3 {
-				util.RespondError(w, http.StatusInternalServerError, "PercobaanKonfirmasi sudah mencapai Batas Maksimal")
+				customResponse.RespondError(w, http.StatusInternalServerError, "PercobaanKonfirmasi sudah mencapai Batas Maksimal")
 				redis.DeleteDataFromRedis(user.KodeUser + "-register-login-count")
 			} else {
 				//redis.DeleteDataFromRedis(user.KodeUser + "-register-login-count")
-				util.RespondError(w, http.StatusConflict, "Login failed")
+				customResponse.RespondError(w, http.StatusConflict, "Login failed")
 			}
 		}
 	}

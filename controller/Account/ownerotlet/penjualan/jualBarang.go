@@ -5,7 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -43,18 +43,18 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		Tbarang.Qty = data.Jumlah
 		Tbarang.KodeUser = jualan.KodeUser
 		if err := db.Save(&Tbarang).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		if err := db.Where("id_barang=?", data.IdBarang).Find(&barang).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		if err := db.Where("id_kategori=? AND kode_user=? AND id_barang=?",
 			strconv.Itoa(barang.IdKategori), jualan.KodeUser, strconv.Itoa(data.IdBarang)).Order("time_created asc").First(&stok).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 
@@ -64,7 +64,7 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		stokBaru.StokAkhir = -data.Jumlah
 
 		if err := db.Save(&stokBaru).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 	}
@@ -91,7 +91,7 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	uang.UangTunai = jualan.UangTunai
 
 	if err := db.Save(&uang).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		log.Println(err.Error())
 		return
 	} else {
@@ -105,7 +105,7 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		hutang.Status = "Utang"
 
 		if err := db.Save(&hutang).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			log.Println(err.Error())
 			return
 		} else {
@@ -113,13 +113,13 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		}
 
 		if err := db.Model(&uang).Updates(mobile.TransaksiUang{IdHutang: hutang.IdHutang}).Error; err != nil {
-			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			log.Println(err.Error())
 			return
 		}
 	}
 
 	jualan.Struk.Tanggal = uang.CreateDate.String()
-	util.RespondJSON(w, 200, jualan)
+	customResponse.RespondJSON(w, 200, jualan)
 
 }

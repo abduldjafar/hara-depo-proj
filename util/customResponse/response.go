@@ -1,4 +1,4 @@
-package util
+package customResponse
 
 import (
 	"encoding/json"

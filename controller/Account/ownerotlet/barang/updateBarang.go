@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
+	"hara-depo-proj/util/image"
 	"log"
 	"net/http"
 	"strconv"
@@ -60,36 +61,36 @@ func UpdateBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err.Error())
 	} else {
-		datasBarang["PhotoBarang"] = util.UploadPhotoAws(r, "PhotoBarang", r.FormValue("KodeUser"), "barang", idbarang)
+		datasBarang["PhotoBarang"] = image.UploadPhotoAws(r, "PhotoBarang", r.FormValue("KodeUser"), "barang", idbarang)
 	}
 
 	if err := db.Model(&barang).Updates(datasBarang).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := db.Where("kode_user=? AND id_barang=?", r.FormValue("KodeUser"), r.FormValue("IdBarang")).
 		First(&stokquery).Order("time_created asc").Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	datasStok["IdStok"] = stokquery.IdStok
 
 	if err := db.Model(&stok).Updates(datasStok).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := db.Where("kode_user=? AND id_barang=?", r.FormValue("KodeUser"), r.FormValue("IdBarang")).
 		Find(&barangResponse).Error; err != nil {
 		fmt.Println("ahay")
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 
 	}
 	response.Barang = barangResponse
 	response.Stok = stok
 
-	util.RespondJSON(w, 200, response)
+	customResponse.RespondJSON(w, 200, response)
 }

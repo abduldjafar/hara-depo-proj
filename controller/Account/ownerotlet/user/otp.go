@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"net/http"
 )
 
@@ -14,7 +14,7 @@ func OtpUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 
 	if err := decoder.Decode(&user); err != nil {
-		util.RespondError(w, http.StatusBadRequest, err.Error())
+		customResponse.RespondError(w, http.StatusBadRequest, err.Error())
 		return
 	}
 	defer r.Body.Close()

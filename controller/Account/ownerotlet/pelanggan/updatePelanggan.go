@@ -3,7 +3,7 @@ package pelanggan
 import (
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"log"
 	"net/http"
 	"strconv"
@@ -32,11 +32,11 @@ func UpdatePelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	datas["TimeCreated"] = time.Now()
 	if err := db.Model(&pelanggan).Updates(datas).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		log.Println(err.Error())
 		return
 	}
 
-	util.RespondJSON(w, http.StatusOK, pelanggan)
+	customResponse.RespondJSON(w, http.StatusOK, pelanggan)
 
 }

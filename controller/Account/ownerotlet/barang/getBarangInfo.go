@@ -5,7 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"net/http"
 )
 
@@ -21,9 +21,9 @@ func GetBarangInfo(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		Joins("inner join kategory on kategory.kode_kategory = barang_otlet.id_kategori").
 		Where("barang_otlet.kode_user=? AND barang_otlet.id_barang=?", kodeuser, idbarang).Find(&barangs).Error; err != nil {
 		//var resp = map[string]interface{}{"status": false, "message": "Something Wrong"}
-		util.RespondError(w, http.StatusNoContent, "No Items")
+		customResponse.RespondError(w, http.StatusNoContent, "No Items")
 	}
 
 	fmt.Println(barangs)
-	util.RespondJSON(w, http.StatusOK, barangs)
+	customResponse.RespondJSON(w, http.StatusOK, barangs)
 }

@@ -8,7 +8,7 @@ import (
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
 	"hara-depo-proj/redis"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"io/ioutil"
 	"net/http"
 )
@@ -33,7 +33,7 @@ func OtpUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		otp.OtpZensiva(user.Hp, otpnumber)
 		redis.SaveData(user.KodeUser+"-register", otpnumber)
 		response := map[string]interface{}{"KodeUser": user.KodeUser}
-		util.RespondJSON(w, http.StatusAccepted, response)
+		customResponse.RespondJSON(w, http.StatusAccepted, response)
 
 		return
 	} else {
@@ -44,7 +44,7 @@ func OtpUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		redis.SaveData(user2.KodeUser+"-register", otpnumber)
 		response := map[string]interface{}{"KodeUser": user2.KodeUser, "Message": "User Registered"}
 		otp.OtpZensiva(user.Hp, otpnumber)
-		util.RespondJSON(w, http.StatusAccepted, response)
+		customResponse.RespondJSON(w, http.StatusAccepted, response)
 		return
 	}
 }

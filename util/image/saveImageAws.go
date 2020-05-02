@@ -1,4 +1,4 @@
-package util
+package image
 
 import (
 	"github.com/aws/aws-sdk-go/aws"

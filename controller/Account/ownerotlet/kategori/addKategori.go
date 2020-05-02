@@ -5,7 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"io/ioutil"
 	"net/http"
 )
@@ -30,12 +30,12 @@ func AddKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	kategoryUndifined.NamaKategory = "Undifined"
 
 	if err := db.Save(&kategoryUndifined).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := db.Save(&kategory).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -43,10 +43,10 @@ func AddKategory(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	stok.IdStok = otp.RandomString(5)
 
 	if err := db.Save(&stok).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	util.RespondJSON(w, http.StatusOK, kategory)
+	customResponse.RespondJSON(w, http.StatusOK, kategory)
 
 }

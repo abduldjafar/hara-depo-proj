@@ -4,7 +4,8 @@ import (
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/otp"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
+	"hara-depo-proj/util/image"
 	"net/http"
 	"strconv"
 )
@@ -47,27 +48,27 @@ func AddBarang(db1 *gorm.DB, db2 *gorm.DB, w http.ResponseWriter, r *http.Reques
 	stok.IdKategori = idkategory
 
 	if err := db1.Save(&barang).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	stok.IDBarang = barang.IdBarang
 	idbarang := strconv.Itoa(barang.IdBarang)
-	barang.PhotoBarang = util.UploadPhotoAws(r, "PhotoBarang", barang.KodeUser, "barang", idbarang)
+	barang.PhotoBarang = image.UploadPhotoAws(r, "PhotoBarang", barang.KodeUser, "barang", idbarang)
 
 	if err := db1.Where("id_barang=?", idbarang).Save(&barang).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := db2.Save(&stok).Error; err != nil {
-		util.RespondError(w, http.StatusInternalServerError, err.Error())
+		customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	respon.Barang = barang
 	respon.StokBarang = stok
-	util.RespondJSON(w, http.StatusOK, respon)
+	customResponse.RespondJSON(w, http.StatusOK, respon)
 
 }
 

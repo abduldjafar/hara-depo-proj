@@ -5,7 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"hara-depo-proj/model/mobile"
-	"hara-depo-proj/util"
+	"hara-depo-proj/util/customResponse"
 	"net/http"
 	"strconv"
 )
@@ -28,6 +28,6 @@ func ListPersediaanOtletOwner(db *gorm.DB, w http.ResponseWriter, r *http.Reques
 	}
 
 	fmt.Println(barangs)
-	util.RespondJSON(w, http.StatusOK, barangs)
+	customResponse.RespondJSON(w, http.StatusOK, barangs)
 
 }
