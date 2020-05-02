@@ -22,6 +22,7 @@ type ResponseGetStruk struct {
 	Subtotal   float32
 	Total      float32
 	Pembulatan float32
+	Pembayaran float32
 	Utang      float32
 }
 type TransaksiBarang struct {
@@ -35,6 +36,7 @@ type TransaksiBarang struct {
 
 type TransaksiUang struct {
 	IdTransaksi      string `gorm:"PRIMARY_KEY"`
+	IdHutang         int
 	KodeUser         string
 	IdPelanggan      int
 	NamaKasir        string
@@ -48,7 +50,7 @@ type TransaksiUang struct {
 	Subtotal         float32
 	Total            float32
 	Pembulatan       float32
-	Utang            float32
+	UangTunai        float32
 	Note             string
 	TanggalPelunasan time.Time
 	CreateDate       time.Time `gorm:"default:CURRENT_TIMESTAMP"`

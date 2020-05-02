@@ -1107,7 +1107,7 @@
             "type": "string"
           },
           {
-            "name": "NamaPelanggan",
+            "name": "Nama",
             "in": "formData",
             "description": "Nama Pelanggan yang didaftarkan",
             "required": true,

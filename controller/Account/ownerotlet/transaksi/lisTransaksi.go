@@ -3,6 +3,7 @@ package transaksi
 import (
 	"hara-depo-proj/model/mobile"
 	"hara-depo-proj/util"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -13,6 +14,8 @@ import (
 func ListTransaksi(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	transaksi := []mobile.TransaksiUang{}
+	response := []mobile.TransaksiUang{}
+
 	vars := mux.Vars(r)
 	page, _ := strconv.Atoi(vars["page"])
 	userJ := vars["kodeuser"]
@@ -36,5 +39,15 @@ func ListTransaksi(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	util.RespondJSON(w, 202, transaksi)
+	for _, data := range transaksi {
+		var hutang mobile.Hutang
+		if err := db.Where("id_hutang=?", data.IdHutang).First(&hutang).Error; err != nil {
+			log.Println(err.Error())
+			util.RespondError(w, http.StatusInternalServerError, "error get datas")
+			return
+		}
+
+		response = append(response, data)
+	}
+	util.RespondJSON(w, 202, response)
 }

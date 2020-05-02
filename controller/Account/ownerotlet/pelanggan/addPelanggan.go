@@ -15,7 +15,7 @@ func AddPelanggan(db1 *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	transaksi := mobile.TransaksiUang{}
 
 	KodeUser := r.FormValue("KodeUser")
-	NamaSuplier := r.FormValue("NamaPelanggan")
+	NamaSuplier := r.FormValue("Nama")
 	Gender := r.FormValue("Gender")
 	TanggalLahir := r.FormValue("TanggalLahir")
 	NoHp := r.FormValue("Hp")

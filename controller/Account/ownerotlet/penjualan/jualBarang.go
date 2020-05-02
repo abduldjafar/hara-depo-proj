@@ -10,16 +10,16 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	jualan := mobile.RequestJualan{}
-
 	Tbarang := mobile.TransaksiBarang{}
-
 	uang := mobile.TransaksiUang{}
+	hutang := mobile.Hutang{}
 
 	body, err1 := ioutil.ReadAll(r.Body)
 
@@ -73,7 +73,6 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	uang.IdPelanggan = jualan.IdPelanggan
 	uang.DiskonNominal = jualan.DiskonNominal
 	uang.DiskonDecimal = jualan.DiskonDecimal
-	uang.Utang = jualan.Utang
 	uang.PajakNominal = jualan.PPNNominal
 	uang.PajakDecimal = jualan.PPNDecimal
 	uang.Subtotal = jualan.Subtotal
@@ -89,7 +88,8 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	tanggalPelunasan, _ := time.Parse("2006-01-02", jualan.TanggalPelunasan)
 	uang.TanggalPelunasan = tanggalPelunasan
 	uang.Note = jualan.Note
-	log.Println(tanggalPelunasan)
+	uang.UangTunai = jualan.UangTunai
+
 	if err := db.Save(&uang).Error; err != nil {
 		util.RespondError(w, http.StatusInternalServerError, err.Error())
 		log.Println(err.Error())
@@ -97,6 +97,28 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	} else {
 		log.Println("sukses save data transaksi ==> kode " + kodeTransaksi)
 	}
+	if strings.ToLower(uang.TipeTransaksi) == "utang" {
+		hutang.IdTransaksi = uang.IdTransaksi
+		hutang.JatuhTempo = uang.TanggalPelunasan
+		hutang.Pembayaran = uang.UangTunai
+		hutang.SisaHutang = uang.Total - uang.UangTunai
+		hutang.Status = "Utang"
+
+		if err := db.Save(&hutang).Error; err != nil {
+			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			log.Println(err.Error())
+			return
+		} else {
+			log.Println("sukses save data hutang  ==> kode " + kodeTransaksi)
+		}
+
+		if err := db.Model(&uang).Updates(mobile.TransaksiUang{IdHutang: hutang.IdHutang}).Error; err != nil {
+			util.RespondError(w, http.StatusInternalServerError, err.Error())
+			log.Println(err.Error())
+			return
+		}
+	}
+
 	jualan.Struk.Tanggal = uang.CreateDate.String()
 	util.RespondJSON(w, 200, jualan)
 

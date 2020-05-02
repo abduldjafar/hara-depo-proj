@@ -145,32 +145,3 @@ type Stokbarang struct {
 	StokAlarm int
 	StokAwal  int
 }
-
-/**
-{
-    "struk":{
-        "NO":"",
-        "NamaKasir":"",
-        "tanggal":""
-    },
-    "barang":[
-        {
-            "IsBarang":1,
-            "jumlah":2,
-        },
-        {
-            "IsBarang":2,
-            "jumlah":4
-        }
-    ],
-    "IdPelanggan":1,
-    "subtotal":25000,
-    "PPN10":2500,
-    "Total":27500,
-    "UangTunai":28000,
-    "Kembalian":500,
-    "JenisTransaksi":"Penjualan",
-    "JenisPembayaran":"Utang"
-}
-
-*/

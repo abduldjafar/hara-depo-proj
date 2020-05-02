@@ -31,6 +31,7 @@ func (app *App) Initialize() {
 	app.TbSuplier = mobile.DBMigrationAccount(db, mobile.Suplier{})
 	app.TbTransaksiBarang = mobile.DBMigrationAccount(db, mobile.TransaksiBarang{})
 	app.TbTransaksiUang = mobile.DBMigrationAccount(db, mobile.TransaksiUang{})
+	app.TbTransaksiUang = mobile.DBMigrationAccount(db, mobile.Hutang{})
 	app.Router = mux.NewRouter()
 
 	app.setRouters()
