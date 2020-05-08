@@ -11,15 +11,12 @@ import (
 	"strconv"
 )
 
-func DetailPelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+func GetDetail(db *gorm.DB, w http.ResponseWriter, idpelanggan int, kodeuser string) {
 	var errRespon error
-	vars := mux.Vars(r)
-	idpelanggan, _ := strconv.Atoi(vars["idpelanggan"])
-	kodeuser := vars["kodeuser"]
 
-	response := mobile.ResponseDetailPelanggan{}
-	PelangganSejak := mobile.PlgganSejak{}
-	KunjunganTerakhir := mobile.KungjnTrkhr{}
+	var response mobile.ResponseDetailPelanggan
+	var PelangganSejak mobile.PlgganSejak
+	var KunjunganTerakhir mobile.KungjnTrkhr
 
 	if err := db.Table("pelanggan").Select("pelanggan.id_pelanggan,pelanggan.nama as Nama ,"+
 		"pelanggan.no_tlp as Hp,sum(hutang.sisa_hutang) as Piutang,count(transaksi_uang.id_transaksi) as jumlah_transaksi,"+
@@ -54,4 +51,14 @@ func DetailPelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		customResponse.RespondJSON(w, 202, response)
 
 	}
+}
+func DetailPelanggan(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+
+	idpelanggan, _ := strconv.Atoi(vars["idpelanggan"])
+	kodeuser := vars["kodeuser"]
+
+	GetDetail(db, w, idpelanggan, kodeuser)
+
 }

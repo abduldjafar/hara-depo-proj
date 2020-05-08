@@ -10,3 +10,10 @@ type Hutang struct {
 	Pembayaran  float32
 	JatuhTempo  time.Time
 }
+
+type RequestBayarHutang struct {
+	Pembayaran        float32
+	TanggalPembayaran string
+	KodeUser          string
+	IdPelanggan       int
+}

@@ -32,11 +32,11 @@
     "/otlet/addbarang": {
       "post": {
         "tags": [
-          "otlet"
+          "barang"
         ],
         "summary": "registrasi otlet owner",
         "description": "",
-        "operationId": "registrasi",
+        "operationId": "/otlet/addbarang",
         "consumes": [
           "multipart/form-data"
         ],
@@ -122,7 +122,7 @@
     "/otlet/addkategori": {
       "post": {
         "tags": [
-          "otlet"
+          "kategori"
         ],
         "summary": "Menambahkan kategori baru",
         "description": "",
@@ -160,7 +160,7 @@
     "/otlet/baranginfo": {
       "get": {
         "tags": [
-          "otlet"
+          "barang"
         ],
         "summary": "Mendapatkan informasi barang",
         "description": "",
@@ -243,7 +243,7 @@
     "/otlet/listbarang": {
       "get": {
         "tags": [
-          "otlet"
+          "barang"
         ],
         "summary": "Mengambil list barang",
         "description": "",
@@ -303,7 +303,7 @@
     "/otlet/listkategori": {
       "get": {
         "tags": [
-          "otlet"
+          "kategori"
         ],
         "summary": "Mengambil list kategory",
         "description": "",
@@ -354,7 +354,7 @@
     "/otlet/listpersediaan": {
       "get": {
         "tags": [
-          "otlet"
+          "persediaan"
         ],
         "summary": "Mengambil list persediaan",
         "description": "",
@@ -396,7 +396,7 @@
     "/otlet/otp": {
       "post": {
         "tags": [
-          "otlet"
+          "otp"
         ],
         "summary": "Mengirimkan otp",
         "description": "",
@@ -438,11 +438,11 @@
     "/otlet/otpconfirm": {
       "post": {
         "tags": [
-          "otlet"
+          "otp"
         ],
         "summary": "Mengkonfirmasi OTP",
         "description": "",
-        "operationId": "/otlet/otp",
+        "operationId": "/otlet/otpconfirm",
         "consumes": [
           "application/json"
         ],
@@ -492,11 +492,11 @@
     "/otlet/registrasi": {
       "post": {
         "tags": [
-          "otlet"
+          "otp"
         ],
         "summary": "registrasi otlet owner",
         "description": "",
-        "operationId": "registrasi",
+        "operationId": "/otlet/registrasi",
         "consumes": [
           "multipart/form-data"
         ],
@@ -617,11 +617,11 @@
     "/otlet/updatebarang": {
       "put": {
         "tags": [
-          "otlet"
+          "barang"
         ],
         "summary": "update field barang",
         "description": "untuk mengupdate silahkan diisi yang mau diupdate. untuk yang tidak diupdate silahkan dikosongkan saja",
-        "operationId": "registrasi",
+        "operationId": "/otlet/updatebarang",
         "consumes": [
           "multipart/form-data"
         ],
@@ -707,11 +707,11 @@
     "/otlet/updatekategory": {
       "put": {
         "tags": [
-          "otlet"
+          "kategori"
         ],
         "summary": "update field barang",
         "description": "untuk mengupdate silahkan diisi yang mau diupdate. untuk yang tidak diupdate silahkan dikosongkan saja",
-        "operationId": "registrasi",
+        "operationId": "/otlet/updatekategory",
         "consumes": [
           "multipart/form-data"
         ],
@@ -755,11 +755,11 @@
     "/otlet/updatepelanggan": {
       "put": {
         "tags": [
-          "otlet"
+          "pelanggan"
         ],
         "summary": "update otlet pelanggan",
         "description": "",
-        "operationId": "update",
+        "operationId": "/otlet/updatepelanggan",
         "consumes": [
           "multipart/form-data"
         ],
@@ -861,11 +861,11 @@
     "/otlet/deletebarang": {
       "delete": {
         "tags": [
-          "otlet"
+          "barang"
         ],
         "summary": "Mendapatkan informasi barang",
         "description": "",
-        "operationId": "/otlet/baranginfo",
+        "operationId": "/otlet/deletebarang",
         "consumes": [
           "application/json"
         ],
@@ -906,11 +906,11 @@
     "/otlet/deletekategory": {
       "delete": {
         "tags": [
-          "otlet"
+          "kategori"
         ],
         "summary": "Mendapatkan informasi barang",
         "description": "",
-        "operationId": "/otlet/baranginfo",
+        "operationId": "/otlet/deletekategory",
         "consumes": [
           "application/json"
         ],
@@ -951,11 +951,11 @@
     "/otlet/deletepelanggan": {
       "delete": {
         "tags": [
-          "otlet"
+          "pelanggan"
         ],
         "summary": "Menghapus Pelanggan",
         "description": "",
-        "operationId": "/otlet/baranginfo",
+        "operationId": "/otlet/deletepelanggan",
         "consumes": [
           "application/json"
         ],
@@ -996,11 +996,11 @@
     "/otlet/addsuplier": {
       "post": {
         "tags": [
-          "otlet"
+          "suplier"
         ],
         "summary": "registrasi otlet suplier",
         "description": "",
-        "operationId": "registrasi",
+        "operationId": "/otlet/addsuplier",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1087,11 +1087,11 @@
     "/otlet/addpelanggan": {
       "post": {
         "tags": [
-          "otlet"
+          "pelanggan"
         ],
         "summary": "registrasi otlet pelanggan",
         "description": "",
-        "operationId": "registrasi",
+        "operationId": "/otlet/addpelanggan",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1192,7 +1192,7 @@
     "/otlet/listtransaksi": {
       "get": {
         "tags": [
-          "otlet"
+          "transaksi"
         ],
         "summary": "Mengambil list transaksi",
         "description": "",
@@ -1310,7 +1310,7 @@
     "/otlet/getstruk": {
       "get": {
         "tags": [
-          "otlet"
+          "transaksi"
         ],
         "summary": "Mendapatkan informasi struk",
         "description": "",
@@ -1434,11 +1434,11 @@
     "/otlet/listpelanggan": {
       "get": {
         "tags": [
-          "otlet"
+          "pelanggan"
         ],
         "summary": "Mendapatkan informasi struk",
         "description": "",
-        "operationId": "/otlet/getstruk",
+        "operationId": "/otlet/listpelanggan",
         "consumes": [
           "application/json"
         ],
@@ -1540,11 +1540,11 @@
     "/otlet/infopelanggan": {
       "get": {
         "tags": [
-          "otlet"
+          "pelanggan"
         ],
         "summary": "Mendapatkan informasi struk",
         "description": "",
-        "operationId": "/otlet/getstruk",
+        "operationId": "/otlet/infopelanggan",
         "consumes": [
           "application/json"
         ],
@@ -1631,7 +1631,7 @@
     "/otlet/penjualan": {
       "post": {
         "tags": [
-          "otlet"
+          "penjualan"
         ],
         "summary": "Penjualan Barang",
         "description": "",
@@ -1664,6 +1664,66 @@
             "description": "User Registered",
             "schema": {
               "$ref": "#/definitions/ResponOtp"
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/otlet/rekomnominal": {
+      "get": {
+        "tags": [
+          "penjualan"
+        ],
+        "summary": "Mendapatkan rekomendasi nominal",
+        "description": "",
+        "operationId": "/otlet/rekomnominal",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nominal",
+            "description": "nominal untuk mendapatkan rekomendasi",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Nominal": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "example": [
+                      130000,
+                      150000
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No item",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "No item"
+                }
+              }
             }
           }
         },

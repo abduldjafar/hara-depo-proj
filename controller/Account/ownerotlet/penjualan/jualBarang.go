@@ -43,17 +43,20 @@ func JualBarang(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		Tbarang.Qty = data.Jumlah
 		Tbarang.KodeUser = jualan.KodeUser
 		if err := db.Save(&Tbarang).Error; err != nil {
+			log.Println(err.Error() + " in Tabel Barang")
 			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		if err := db.Where("id_barang=?", data.IdBarang).Find(&barang).Error; err != nil {
+			log.Println(err.Error() + " in Barang")
 			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 
 		if err := db.Where("id_kategori=? AND kode_user=? AND id_barang=?",
 			strconv.Itoa(barang.IdKategori), jualan.KodeUser, strconv.Itoa(data.IdBarang)).Order("time_created asc").First(&stok).Error; err != nil {
+			log.Println(err.Error() + " in table stok")
 			customResponse.RespondError(w, http.StatusInternalServerError, err.Error())
 			return
 		}

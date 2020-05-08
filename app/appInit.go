@@ -13,6 +13,8 @@ func (app *App) Initialize() {
 	baseConfig := &config.Configuration{}
 	config.GetConfig(baseConfig)
 
+	sh := http.StripPrefix("/swaggerui/", http.FileServer(http.Dir("./dist/")))
+
 	db, err := gorm.Open("postgres", "host="+baseConfig.Postgres.Url+" port="+baseConfig.Postgres.Port+""+
 		" user="+baseConfig.Postgres.User+" dbname="+baseConfig.Postgres.Db+" password="+baseConfig.Postgres.Password+
 		" sslmode=disable")
@@ -35,6 +37,5 @@ func (app *App) Initialize() {
 	app.Router = mux.NewRouter()
 
 	app.setRouters()
-	sh := http.StripPrefix("/swaggerui/", http.FileServer(http.Dir("./dist/")))
 	app.Router.PathPrefix("/swaggerui/").Handler(sh)
 }

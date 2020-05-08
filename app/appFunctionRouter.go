@@ -10,6 +10,7 @@ import (
 	"hara-depo-proj/controller/Account/ownerotlet/suplier"
 	"hara-depo-proj/controller/Account/ownerotlet/transaksi"
 	"hara-depo-proj/controller/Account/ownerotlet/user"
+	"hara-depo-proj/controller/Healthcheck"
 	"net/http"
 )
 
@@ -103,4 +104,16 @@ func (app *App) UpdatePelanggan(w http.ResponseWriter, r *http.Request) {
 
 func (app *App) DeletePelangganI(w http.ResponseWriter, r *http.Request) {
 	pelanggan.DeletePelanggan(app.TbTransaksiUang, w, r)
+}
+
+func (app *App) RekomendasiNominal(w http.ResponseWriter, r *http.Request) {
+	penjualan.RekomendasiNominal(w, r)
+}
+
+func (app *App) HealthCheck(w http.ResponseWriter, r *http.Request) {
+	Healthcheck.HealthCheck(w, r)
+}
+
+func (app *App) BayarUtangPelanggan(w http.ResponseWriter, r *http.Request) {
+	penjualan.UtangJualan(app.TbBarang, w, r)
 }
